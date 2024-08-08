@@ -62,19 +62,12 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="KeyboardWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="KeyboardRemodel.xaml.cs">
       <DependentUpon>KeyboardRemodel.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="KeyboardWindow.xaml.cs">
-      <DependentUpon>KeyboardWindow.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +98,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\KioskRebornLib\KioskRebornLib.csproj">
+      <Project>{f074efa9-fa20-42eb-a41b-7c5c700d64d6}</Project>
+      <Name>KioskRebornLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KioskReborn\KioskReborn.csproj">
       <Project>{406c340e-4353-4d98-8290-5bd2fc254c32}</Project>
       <Name>KioskReborn</Name>

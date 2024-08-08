@@ -89,6 +89,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="RestartApp.cs" />
     <Compile Include="TaskBarWindow.xaml.cs">
       <DependentUpon>TaskBarWindow.xaml</DependentUpon>
     </Compile>

@@ -82,15 +82,15 @@ namespace KioskRebornUpdater
                     Log.Information("Current Version: " + currentVersion);
                     Log.Information("Available Version: " + updateVersion);
 
-                    Process[] processes = Process.GetProcessesByName("KioskReborn");
+                    //Process[] processes = Process.GetProcessesByName("KioskReborn");
 
-                    if (processes.Length != 0)
-                    {
-                        foreach (Process p in processes)
-                        {
-                            p.Kill();
-                        }
-                    }
+                    //if (processes.Length != 0)
+                    //{
+                    //    foreach (Process p in processes)
+                    //    {
+                    //        p.Kill();
+                    //    }
+                    //}
 
                     Process process = new Process();
 
@@ -101,10 +101,12 @@ namespace KioskRebornUpdater
 
                     process.WaitForExit();
 
-                    if(!ProcessExtensions.StartProcessAsCurrentUser(application))
-                    {
-                        Log.Error("Failed to relaunch KioskReborn");
-                    }
+                    //if(!ProcessExtensions.StartProcessAsCurrentUser(application))
+                    //{
+                    //    Log.Error("Failed to relaunch KioskReborn");
+                    //}
+
+                    KioskReborn.RestartApp.Restart();
                 }
                 else
                 {

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Worker">
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -24,5 +24,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\KioskRebornLib\KioskRebornLib.csproj" />
+    <ProjectReference Include="..\KioskReborn\KioskReborn.csproj" />
   </ItemGroup>
 </Project>

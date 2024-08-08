@@ -36,6 +36,8 @@ namespace KioskReborn
         {
             InitializeComponent();
 
+            Shutdown.ToolTip = "v" + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
             Clock.Content = DateTime.Now.ToString("hh:mm:ss tt");
 
             timer.Tick += new EventHandler(OnTick);
@@ -53,6 +55,7 @@ namespace KioskReborn
                 button.HorizontalAlignment = HorizontalAlignment.Stretch;
                 button.VerticalAlignment = VerticalAlignment.Stretch;
                 button.BorderThickness = new Thickness(0, 0, 0, 0);
+                button.ToolTip = "Web Browser";
 
                 Style style = Application.Current.FindResource("TaskbarButton") as Style;
                 button.Style = style;
@@ -93,6 +96,7 @@ namespace KioskReborn
                 Button button = new Button();
                 button.Name = buttonSettings.name.Replace(" ", "_");
                 button.BorderThickness = new Thickness(0, 0, 0, 0);
+                button.ToolTip = buttonSettings.name;
 
                 Style style = Application.Current.FindResource("TaskbarAppButton") as Style;
                 button.Style = style;

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Windows.Media.Imaging;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace KioskReborn
+namespace KioskRebornLib
 {
     public class Settings
     {
@@ -14,6 +9,10 @@ namespace KioskReborn
         public static string PATH = Path.Combine(Environment.GetEnvironmentVariable("LocalAppData"), "KioskReborn");
         [JsonIgnore]
         private static string CONFIG = Path.Combine(PATH, "settings.json");
+
+        [JsonProperty]
+        public string UpdateLocation { get; set; }
+
         [JsonConverter(typeof(StringEnumConverter))]
         public enum Colors { Classic, Blue, Dark, Green, Gray, LJU }
 
@@ -28,6 +27,7 @@ namespace KioskReborn
 
         public Settings()
         {
+            UpdateLocation = @"C:\Users\Public\Downloads";
             Color = Colors.Classic;
             Background = Path.Combine(PATH, "Images", "background.jpg");
             Browser = new WBrowser();
@@ -41,31 +41,6 @@ namespace KioskReborn
             if (!Directory.Exists(PATH))
             {
                 Directory.CreateDirectory(PATH);
-            }
-
-            string images = Path.Combine(Settings.PATH, "Images");
-
-            if (!Directory.Exists(images))
-            {
-                Directory.CreateDirectory(images);
-
-                Bitmap image = Properties.Resources.calculator;
-                image.Save(Path.Combine(images, "calculator.png"));
-
-                image = Properties.Resources.notepad;
-                image.Save(Path.Combine(images, "notepad.png"));
-
-                image = Properties.Resources.background;
-                image.Save(Path.Combine(images, "background.jpg"));
-
-                image = Properties.Resources.lju_background;
-                image.Save(Path.Combine(images, "lju_background.jpg"));
-
-                image = Properties.Resources.WPS_Retriever.ToBitmap();
-                image.Save(Path.Combine(images, "WPS_Retriever.ico"));
-
-                image = Properties.Resources.LJU_PlotFetcher.ToBitmap();
-                image.Save(Path.Combine(images, "LJU_PlotFetcher.ico"));
             }
 
             string passwd = Path.Combine(Settings.PATH, "passwd");

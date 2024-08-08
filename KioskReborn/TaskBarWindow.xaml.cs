@@ -17,6 +17,7 @@ using System.Windows.Input;
 using System.Reflection;
 using System.Windows.Media;
 using System.Drawing.Imaging;
+using KioskRebornLib;
 
 namespace KioskReborn
 {

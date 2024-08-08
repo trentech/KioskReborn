@@ -1,8 +1,9 @@
-﻿using System;
+﻿using KioskRebornLib;
+using System;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -12,6 +13,31 @@ namespace KioskReborn
     {
         public WallpaperWindow()
         {
+            string images = Path.Combine(Settings.PATH, "Images");
+
+            if (!Directory.Exists(images))
+            {
+                Directory.CreateDirectory(images);
+
+                Bitmap image = Properties.Resources.calculator;
+                image.Save(Path.Combine(images, "calculator.png"));
+
+                image = Properties.Resources.notepad;
+                image.Save(Path.Combine(images, "notepad.png"));
+
+                image = Properties.Resources.background;
+                image.Save(Path.Combine(images, "background.jpg"));
+
+                image = Properties.Resources.lju_background;
+                image.Save(Path.Combine(images, "lju_background.jpg"));
+
+                image = Properties.Resources.WPS_Retriever.ToBitmap();
+                image.Save(Path.Combine(images, "WPS_Retriever.ico"));
+
+                image = Properties.Resources.LJU_PlotFetcher.ToBitmap();
+                image.Save(Path.Combine(images, "LJU_PlotFetcher.ico"));
+            }
+
             InitializeComponent();
 
             Width = SystemParameters.PrimaryScreenWidth;

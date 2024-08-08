@@ -1,0 +1,14 @@
+﻿<Window x:Name="Calendar" x:Class="KioskReborn.CalendarWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KioskReborn"
+        mc:Ignorable="d"
+        Title="Calendar" Height="370" Width="390" ResizeMode="NoResize" WindowStyle="ToolWindow" Top="50" Left="-5">
+    <Grid>
+        <Viewbox>
+            <Calendar HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        </Viewbox>
+    </Grid>
+</Window>

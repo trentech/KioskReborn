@@ -1,0 +1,159 @@
+﻿<Window x:Class="TouchKeyboard.KeyboardRemodel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TouchKeyboard"
+        mc:Ignorable="d"
+        Title="Keyboard" Height="353" Width="996.5" WindowStyle="None" ResizeMode="NoResize" MouseDown="OnDrag" AllowsTransparency="True" Topmost="True" Focusable="False" Style="{DynamicResource Window}">
+    <Grid Margin="10,25,10,10">
+        <Grid Margin="0,0,0,255" Height="63">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="94.5"/>
+            </Grid.ColumnDefinitions>
+            <RepeatButton Grid.Column="0" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Esc" Content="Esc" Click="OnEsc"></RepeatButton>
+            <RepeatButton Grid.Column="1" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Tilde" Content="`" Click="OnTilde"></RepeatButton>
+            <RepeatButton Grid.Column="2" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="One" Content="1" Click="OnOne"></RepeatButton>
+            <RepeatButton Grid.Column="3" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Two" Content="2" Click="OnTwo"></RepeatButton>
+            <RepeatButton Grid.Column="4" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Three" Content="3" Click="OnThree"></RepeatButton>
+            <RepeatButton Grid.Column="5" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Four" Content="4" Click="OnFour"></RepeatButton>
+            <RepeatButton Grid.Column="6" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Five" Content="5" Click="OnFive"></RepeatButton>
+            <RepeatButton Grid.Column="7" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Six" Content="6" Click="OnSix"></RepeatButton>
+            <RepeatButton Grid.Column="8" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Seven" Content="7" Click="OnSeven"></RepeatButton>
+            <RepeatButton Grid.Column="9" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Eight" Content="8" Click="OnEight"></RepeatButton>
+            <RepeatButton Grid.Column="10" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Nine" Content="9" Click="OnNine"></RepeatButton>
+            <RepeatButton Grid.Column="11" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Zero" Content="0" Click="OnZero"></RepeatButton>
+            <RepeatButton Grid.Column="12" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Minus" Content="-" Click="OnMinus"></RepeatButton>
+            <RepeatButton Grid.Column="13" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Equal" Content="=" Click="OnEquals"></RepeatButton>
+            <RepeatButton Grid.Column="14" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="BackSpace" Content="Back" Click="OnBackspace"></RepeatButton>
+        </Grid>
+        <Grid Margin="0,63,0,192" Height="63">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="94.5"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+            </Grid.ColumnDefinitions>
+            <RepeatButton Grid.Column="0" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Tab" Content="Tab" Click="OnTab"></RepeatButton>
+            <RepeatButton Grid.Column="1" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Q" Content="q" Click="OnQ"></RepeatButton>
+            <RepeatButton Grid.Column="2" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="W" Content="w" Click="OnW"></RepeatButton>
+            <RepeatButton Grid.Column="3" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="E" Content="e" Click="OnE"></RepeatButton>
+            <RepeatButton Grid.Column="4" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="R" Content="r" Click="OnR"></RepeatButton>
+            <RepeatButton Grid.Column="5" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="T" Content="t" Click="OnT"></RepeatButton>
+            <RepeatButton Grid.Column="6" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Y" Content="y" Click="OnY"></RepeatButton>
+            <RepeatButton Grid.Column="7" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="U" Content="u" Click="OnU"></RepeatButton>
+            <RepeatButton Grid.Column="8" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="I" Content="i" Click="OnI"></RepeatButton>
+            <RepeatButton Grid.Column="9" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="O" Content="o" Click="OnO"></RepeatButton>
+            <RepeatButton Grid.Column="10" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="P" Content="p" Click="OnP"></RepeatButton>
+            <RepeatButton Grid.Column="11" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="LeftBracket" Content="[" Click="OnLeftBracket"></RepeatButton>
+            <RepeatButton Grid.Column="12" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="RightBracket" Content="]" Click="OnRightBracket"></RepeatButton>
+            <RepeatButton Grid.Column="13" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="BackSlash" Content="\" Click="OnBackSlash"></RepeatButton>
+            <RepeatButton Grid.Column="14" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Del" Content="Del" Click="OnDel"></RepeatButton>
+        </Grid>
+        <Grid Margin="0,126,0,129" Height="63">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="126"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="157.5"/>
+            </Grid.ColumnDefinitions>
+            <RepeatButton Grid.Column="0" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Caps" Content="Caps" Click="OnCaps"></RepeatButton>
+            <RepeatButton Grid.Column="1" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="A" Content="a" Click="OnA"></RepeatButton>
+            <RepeatButton Grid.Column="2" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="S" Content="s" Click="OnS"></RepeatButton>
+            <RepeatButton Grid.Column="3" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="D" Content="d" Click="OnD"></RepeatButton>
+            <RepeatButton Grid.Column="4" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="F" Content="f" Click="OnF"></RepeatButton>
+            <RepeatButton Grid.Column="5" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="G" Content="g" Click="OnG"></RepeatButton>
+            <RepeatButton Grid.Column="6" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="H" Content="h" Click="OnH"></RepeatButton>
+            <RepeatButton Grid.Column="7" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="J" Content="j" Click="OnJ"></RepeatButton>
+            <RepeatButton Grid.Column="8" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="K" Content="k" Click="OnK"></RepeatButton>
+            <RepeatButton Grid.Column="9" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="L" Content="l" Click="OnL"></RepeatButton>
+            <RepeatButton Grid.Column="10" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="SemiColon" Content=";" Click="OnSemiColon"></RepeatButton>
+            <RepeatButton Grid.Column="11" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Quote" Content="'" Click="OnQuote"></RepeatButton>
+            <RepeatButton Grid.Column="12" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Enter" Content="Enter" Click="OnEnter"></RepeatButton>
+        </Grid>
+        <Grid Margin="0,189,0,66" Height="63">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="157.5"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="126"/>
+            </Grid.ColumnDefinitions>
+            <RepeatButton Grid.Column="0" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="LeftShift" Content="Shift" Click="OnShift"></RepeatButton>
+            <RepeatButton Grid.Column="1" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Z" Content="z" Click="OnZ"></RepeatButton>
+            <RepeatButton Grid.Column="2" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="X" Content="x" Click="OnX"></RepeatButton>
+            <RepeatButton Grid.Column="3" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="C" Content="c" Click="OnC"></RepeatButton>
+            <RepeatButton Grid.Column="4" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="V" Content="v" Click="OnV"></RepeatButton>
+            <RepeatButton Grid.Column="5" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="B" Content="b" Click="OnB"></RepeatButton>
+            <RepeatButton Grid.Column="6" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="N" Content="n" Click="OnN"></RepeatButton>
+            <RepeatButton Grid.Column="7" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="M" Content="m" Click="OnM"></RepeatButton>
+            <RepeatButton Grid.Column="8" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Comma" Content="," Click="OnComma"></RepeatButton>
+            <RepeatButton Grid.Column="9" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Period" Content="." Click="OnPeriod"></RepeatButton>
+            <RepeatButton Grid.Column="10" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="ForwardSlash" Content="/" Click="OnForwardSlash"></RepeatButton>
+            <RepeatButton Grid.Column="11" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Up" Content="{StaticResource Up}" Click="OnUp"></RepeatButton>
+            <RepeatButton Grid.Column="12" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="RightShift" Content="Shift" Click="OnShift"></RepeatButton>
+        </Grid>
+        <Grid Margin="0,252,0,3" Height="63">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="346.5"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+                <ColumnDefinition Width="63"/>
+            </Grid.ColumnDefinitions>
+            <RepeatButton Grid.Column="4" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Space" Content="Space" Click="OnSpace"></RepeatButton>
+            <RepeatButton Grid.Column="7" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Lft" Content="{StaticResource Lft}" Click="OnLeft"></RepeatButton>
+            <RepeatButton Grid.Column="8" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Down" Content="{StaticResource Down}" Click="OnDown"></RepeatButton>
+            <RepeatButton Grid.Column="9" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Right" Content="{StaticResource Right}" Click="OnRight"></RepeatButton>
+            <RepeatButton Grid.Column="10" BorderThickness="0" FontFamily="Calibri" FontWeight="Bold" FontSize="24" Style="{DynamicResource KeyboardButton}" Name="Exit" Content="Exit" Click="OnExit"></RepeatButton>
+        </Grid>
+    </Grid>
+</Window>

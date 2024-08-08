@@ -18,8 +18,10 @@
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Background" Value="#78b03c"/>
-                <Setter Property="Width" Value="40"/>
-                <Setter Property="Height" Value="40"/>
+                <Setter Property="Margin" Value="5"></Setter>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="False">
+                <Setter Property="Margin" Value="2"></Setter>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -41,8 +43,10 @@
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Background" Value="#78b03c"/>
-                <Setter Property="Width" Value="40"/>
-                <Setter Property="Height" Value="40"/>
+                <Setter Property="Margin" Value="5"></Setter>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="False">
+                <Setter Property="Margin" Value="2"></Setter>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -65,6 +69,10 @@
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Background" Value="#78b03c"/>
+                <Setter Property="Margin" Value="5"></Setter>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="False">
+                <Setter Property="Margin" Value="2"></Setter>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -128,7 +136,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Background="{TemplateBinding Background}">
+                    <Border Background="{TemplateBinding Background}" >
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>
@@ -140,8 +148,10 @@
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Background" Value="#c9c9c9"/>
-                <Setter Property="Width" Value="40"/>
-                <Setter Property="Height" Value="40"/>
+                <Setter Property="Margin" Value="5"></Setter>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="False">
+                <Setter Property="Margin" Value="2"></Setter>
             </Trigger>
         </Style.Triggers>
     </Style>

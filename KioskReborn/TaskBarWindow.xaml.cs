@@ -52,7 +52,7 @@ namespace KioskReborn
                 button.HorizontalAlignment = HorizontalAlignment.Stretch;
                 button.VerticalAlignment = VerticalAlignment.Stretch;
                 button.BorderThickness = new Thickness(0, 0, 0, 0);
-                button.Margin = new Thickness(2,2,2,2);
+
                 Style style = Application.Current.FindResource("TaskbarButton") as Style;
                 button.Style = style;
                 button.Content = Application.Current.FindResource("Browser") as Image;
@@ -92,7 +92,6 @@ namespace KioskReborn
                 Button button = new Button();
                 button.Name = buttonSettings.name.Replace(" ", "_");
                 button.BorderThickness = new Thickness(0, 0, 0, 0);
-                button.Margin = new Thickness(2,2,2,2);
 
                 Style style = Application.Current.FindResource("TaskbarAppButton") as Style;
                 button.Style = style;

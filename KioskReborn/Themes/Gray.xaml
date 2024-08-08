@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <Style TargetType="Button" x:Key="TaskbarButton">
-        <Setter Property="Background" Value="#838282"/>
+        <Setter Property="Background" Value="#838383"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -14,10 +14,14 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#a5a5a5"/>
+                <Setter Property="Background" Value="#c9c9c9"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="#c9c9c9"/>
+                <Setter Property="Background" Value="#aeaeae"/>
+                <Setter Property="Margin" Value="5"></Setter>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="False">
+                <Setter Property="Margin" Value="2"></Setter>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -35,16 +39,20 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#a5a5a5"/>
+                <Setter Property="Background" Value="#c9c9c9"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="#c9c9c9"/>
+                <Setter Property="Background" Value="#aeaeae"/>
+                <Setter Property="Margin" Value="5"></Setter>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="False">
+                <Setter Property="Margin" Value="2"></Setter>
             </Trigger>
         </Style.Triggers>
     </Style>
     
     <Style TargetType="Button" x:Key="BrowserButtonFavorite">
-        <Setter Property="Background" Value="#838282"/>
+        <Setter Property="Background" Value="#838383"/>
         <Setter Property="BorderBrush" Value="White"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -57,10 +65,14 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#a5a5a5"/>
+                <Setter Property="Background" Value="#c9c9c9"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="#c9c9c9"/>
+                <Setter Property="Background" Value="#aeaeae"/>
+                <Setter Property="Margin" Value="5"></Setter>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="False">
+                <Setter Property="Margin" Value="2"></Setter>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -70,7 +82,7 @@
     </Style>
 
     <Style TargetType="RepeatButton" x:Key="KeyboardButton">
-        <Setter Property="Background" Value="#c9c9c9"/>
+        <Setter Property="Background" Value="#e5e5e5"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RepeatButton}">
@@ -82,16 +94,20 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#a5a5a5"/>
+                <Setter Property="Background" Value="#c9c9c9"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="#c9c9c9"/>
+                <Setter Property="Background" Value="#aeaeae"/>
+                <Setter Property="Margin" Value="6"></Setter>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="False">
+                <Setter Property="Margin" Value="3"></Setter>
             </Trigger>
         </Style.Triggers>
     </Style>
 
     <Style TargetType="RepeatButton" x:Key="KeyboardButtonShift">
-        <Setter Property="Background" Value="#c9c9c9"/>
+        <Setter Property="Background" Value="#aeaeae"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RepeatButton}">
@@ -103,16 +119,20 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#a5a5a5"/>
+                <Setter Property="Background" Value="#aeaeae"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Background" Value="#c9c9c9"/>
+                <Setter Property="Margin" Value="6"></Setter>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="False">
+                <Setter Property="Margin" Value="3"></Setter>
             </Trigger>
         </Style.Triggers>
     </Style>
     
     <Style TargetType="Button" x:Key="BrowserButton">
-        <Setter Property="Background" Value="#c9c9c9"/>
+        <Setter Property="Background" Value="#838383"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -124,16 +144,20 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#a5a5a5"/>
+                <Setter Property="Background" Value="#c9c9c9"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="#c9c9c9"/>
+                <Setter Property="Background" Value="#aeaeae"/>
+                <Setter Property="Margin" Value="5"></Setter>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="False">
+                <Setter Property="Margin" Value="2"></Setter>
             </Trigger>
         </Style.Triggers>
     </Style>
     
     <Style TargetType="Window" x:Key="Window">
-        <Setter Property="Background" Value="#838282"/>
+        <Setter Property="Background" Value="#838383"/>
     </Style>
 
     <Style x:Key="Clock" TargetType="{x:Type Label}">

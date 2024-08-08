@@ -13,9 +13,9 @@
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
-        <Button Grid.Column="0" x:Name="Shutdown" Content="{DynamicResource Shutdown}" Style="{DynamicResource TaskbarButton}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0,0,0,0" Margin="2,2,2,2" Click="OnShutdown"/>
+        <Button Grid.Column="0" x:Name="Shutdown" Content="{DynamicResource Shutdown}" Style="{DynamicResource TaskbarButton}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0,0,0,0" Click="OnShutdown"/>
         <Label Grid.Column="1" x:Name="Clock" Style="{DynamicResource Clock}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Calibri" FontSize="34" FontWeight="Bold" RenderTransformOrigin="0.502,0.538" Content="08:00:00 PM" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" MouseDoubleClick="OnClock"/>
-        <Button Grid.Column="2" x:Name="Keyboard" Content="{DynamicResource Keyboard}"  Style="{DynamicResource TaskbarButton}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0,0,0,0" Margin="2,2,2,2" Click="OnKeyboard"/>
-        <Button Grid.Column="3" x:Name="Shell" Content="{DynamicResource Shell}"  Style="{DynamicResource TaskbarButton}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0,0,0,0" Margin="2,2,2,2" Click="OnShell" MouseDown="OnMouseDown"/>   
+        <Button Grid.Column="2" x:Name="Keyboard" Content="{DynamicResource Keyboard}"  Style="{DynamicResource TaskbarButton}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0,0,0,0" Click="OnKeyboard"/>
+        <Button Grid.Column="3" x:Name="Shell" Content="{DynamicResource Shell}"  Style="{DynamicResource TaskbarButton}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0,0,0,0" Click="OnShell" MouseDown="OnMouseDown"/>   
     </Grid>
 </Window>

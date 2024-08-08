@@ -51,10 +51,10 @@ namespace KioskReborn
 
                 Button button = new Button();
 
-                button.HorizontalAlignment = HorizontalAlignment.Right;
+                button.HorizontalAlignment = HorizontalAlignment.Stretch;
+                button.VerticalAlignment = VerticalAlignment.Stretch;
                 button.BorderThickness = new Thickness(2, 2, 2, 2);
-                button.Width = favorite.Width - 4;
-                button.Height = 46;
+
                 button.Click += (sender, args) =>
                 {
                     webView.Source = new Uri(favorite.URL);

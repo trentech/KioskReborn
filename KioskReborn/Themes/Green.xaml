@@ -18,6 +18,10 @@
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Background" Value="#479721"/>
+                <Setter Property="Margin" Value="5"></Setter>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="False">
+                <Setter Property="Margin" Value="2"></Setter>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -39,6 +43,10 @@
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Background" Value="#479721"/>
+                <Setter Property="Margin" Value="5"></Setter>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="False">
+                <Setter Property="Margin" Value="2"></Setter>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -60,6 +68,10 @@
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Background" Value="#479721"/>
+                <Setter Property="Margin" Value="5"></Setter>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="False">
+                <Setter Property="Margin" Value="2"></Setter>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -85,6 +97,10 @@
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Background" Value="#479721"/>
+                <Setter Property="Margin" Value="6"></Setter>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="False">
+                <Setter Property="Margin" Value="3"></Setter>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -106,6 +122,10 @@
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Background" Value="#479721"/>
+                <Setter Property="Margin" Value="6"></Setter>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="False">
+                <Setter Property="Margin" Value="3"></Setter>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -127,6 +147,10 @@
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Background" Value="#479721"/>
+                <Setter Property="Margin" Value="5"></Setter>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="False">
+                <Setter Property="Margin" Value="2"></Setter>
             </Trigger>
         </Style.Triggers>
     </Style>

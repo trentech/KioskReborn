@@ -15,10 +15,10 @@
                 <ColumnDefinition Width="50"/>
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
-            <Button Style="{DynamicResource BrowserButton}" Grid.Column="0" x:Name="ExitButton" DockPanel.Dock="Right" Content="X" BorderThickness="0,0,0,0" Margin="2,2,2,2" Width="48" Height="48" HorizontalAlignment="Right" FontFamily="Calibri" FontSize="26" FontWeight="Bold" Click="OnExit"/>
-            <Button Content="{DynamicResource Right}" Style="{DynamicResource BrowserButton}" Grid.Column="1" x:Name="ForwardButton" DockPanel.Dock="Right" Width="50" BorderThickness="0,0,0,0" Margin="2,2,2,2" Height="48" HorizontalAlignment="Right" Click="OnForward"/>
-            <Button Content="{DynamicResource Lft}" Style="{DynamicResource BrowserButton}" Grid.Column="2" x:Name="BackwardButton" DockPanel.Dock="Right" BorderThickness="0,0,0,0" Margin="2,2,2,2" Width="48" Height="48" HorizontalAlignment="Right" Click="OnBack"/>
-            <Button Content="{DynamicResource Refresh}" Style="{DynamicResource BrowserButton}" Grid.Column="3" x:Name="RefreshButton" DockPanel.Dock="Right" BorderThickness="0,0,0,0" Margin="2,2,2,2" Width="48" Height="48" HorizontalAlignment="Right" Click="OnRefresh"/>
+            <Button Style="{DynamicResource BrowserButton}" Grid.Column="0" x:Name="ExitButton" DockPanel.Dock="Right" Content="X" BorderThickness="0,0,0,0" FontFamily="Calibri" FontSize="26" FontWeight="Bold" Click="OnExit"/>
+            <Button Content="{DynamicResource Right}" Style="{DynamicResource BrowserButton}" Grid.Column="1" x:Name="ForwardButton" DockPanel.Dock="Right" BorderThickness="0,0,0,0" Click="OnForward"/>
+            <Button Content="{DynamicResource Lft}" Style="{DynamicResource BrowserButton}" Grid.Column="2" x:Name="BackwardButton" DockPanel.Dock="Right" BorderThickness="0,0,0,0" Click="OnBack"/>
+            <Button Content="{DynamicResource Refresh}" Style="{DynamicResource BrowserButton}" Grid.Column="3" x:Name="RefreshButton" DockPanel.Dock="Right" BorderThickness="0,0,0,0" Click="OnRefresh"/>
         </Grid>
         <Wpf:WebView2 x:Name="webView" Source="https://google.com"/>
     </DockPanel>

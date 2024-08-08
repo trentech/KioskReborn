@@ -293,7 +293,7 @@ namespace TouchKeyboard
 
         private void OnD(object sender, RoutedEventArgs e)
         {
-            keyPress(VirtualKeyCode.VK_S, sender, e);
+            keyPress(VirtualKeyCode.VK_D, sender, e);
         }
 
         private void OnF(object sender, RoutedEventArgs e)

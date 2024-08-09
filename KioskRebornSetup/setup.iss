@@ -42,5 +42,5 @@ Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: de
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
-Filename: "sc"; Parameters: "create KioskRebornUpdater start= auto DisplayName= KioskRebornUpdater binPath= ""C:\Program Files (x86)\KioskReborn\KioskReborn.exe"""; Flags: runascurrentuser runhidden
+;Filename: "sc"; Parameters: "create KioskRebornUpdater start= auto DisplayName= KioskRebornUpdater binPath= ""C:\Program Files (x86)\KioskReborn\KioskReborn.exe"""; Flags: runascurrentuser runhidden
 

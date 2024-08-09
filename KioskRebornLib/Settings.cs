@@ -10,8 +10,8 @@ namespace KioskRebornLib
         [JsonIgnore]
         private static string CONFIG = Path.Combine(PATH, "settings.json");
 
-        [JsonProperty]
-        public string UpdateLocation { get; set; }
+      //  [JsonProperty]
+      //  public string UpdateLocation { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
         public enum Colors { Classic, Blue, Dark, Green, Gray, LJU }
@@ -27,7 +27,7 @@ namespace KioskRebornLib
 
         public Settings()
         {
-            UpdateLocation = @"C:\Users\Public\Downloads";
+     //       UpdateLocation = @"C:\Users\Public\Downloads";
             Color = Colors.Classic;
             Background = Path.Combine(PATH, "Images", "background.jpg");
             Browser = new WBrowser();

@@ -1,9 +1,6 @@
 using KioskRebornLib;
-using Microsoft.AspNetCore.Hosting.Server;
 using Serilog;
-using System;
 using System.Diagnostics;
-using System.Reflection;
 
 namespace KioskRebornUpdater
 {
@@ -56,9 +53,9 @@ namespace KioskRebornUpdater
                     continue;
                 }
 
-                Settings settings = Settings.Get();
+              //  Settings settings = Settings.Get();
 
-                string path = Path.Combine(settings.UpdateLocation, "KioskReborn_Setup.exe"); 
+                string path = Path.Combine(@"C:\Users\ttmonroe\OneDrive - Arvos Group\Documents\IDE Projects\Visual Studio\KioskReborn\KioskRebornSetup", "KioskReborn_Setup.exe"); 
 
                 if (!File.Exists(path))
                 {
@@ -106,7 +103,15 @@ namespace KioskRebornUpdater
                     //    Log.Error("Failed to relaunch KioskReborn");
                     //}
 
-                    KioskReborn.RestartApp.Restart();
+                    try
+                    {
+                        KioskReborn.RestartApp.Restart();
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error(ex.Message);
+                    }
+                    
                 }
                 else
                 {

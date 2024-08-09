@@ -164,10 +164,10 @@
         <Setter Property="Foreground" Value="White"/>
     </Style>
 
-    <Image x:Key="Refresh" Source="../Resources/refresh.png" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased"/>
-    <Image x:Key="Shutdown" Source="../Resources/shutdown_white.png" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased"/>
-    <Image x:Key="Shell" Source="../Resources/terminal_white.png" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased"/>
-    <Image x:Key="Keyboard" Source="../Resources/keyboard_white.png" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased"/>
-    <Image x:Key="Browser" Source="../Resources/web_white.png" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased"/>
-    <Image x:Key="NoIcon" Source="../Resources/icon_not_found.png" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased"/>
+    <Image x:Key="Refresh" Source="/Resources/refresh.png" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased"/>
+    <Image x:Key="Shutdown" Source="/Resources/shutdown_white.png" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased"/>
+    <Image x:Key="Shell" Source="/Resources/terminal_white.png" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased"/>
+    <Image x:Key="Keyboard" Source="/Resources/keyboard_white.png" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased"/>
+    <Image x:Key="Browser" Source="/Resources/web_white.png" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased"/>
+    <Image x:Key="NoIcon" Source="/Resources/icon_not_found.png" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased"/>
 </ResourceDictionary>

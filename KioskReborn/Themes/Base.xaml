@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Image x:Key="Up" Source="pack://application:,,,/KioskReborn;component/Resources/up.png"/>
-    <Image x:Key="Down" Source="pack://application:,,,/KioskReborn;component/Resources/down.png"/>
-    <Image x:Key="Lft" Source="pack://application:,,,/KioskReborn;component/Resources/left.png"/>
-    <Image x:Key="Right" Source="pack://application:,,,/KioskReborn;component/Resources/right.png"/>
+    <Image x:Key="Up" Source="/Resources/up.png"/>
+    <Image x:Key="Down" Source="/Resources/down.png"/>
+    <Image x:Key="Lft" Source="/Resources/left.png"/>
+    <Image x:Key="Right" Source="/Resources/right.png"/>
 </ResourceDictionary>

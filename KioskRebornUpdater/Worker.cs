@@ -1,6 +1,18 @@
 using KioskRebornLib;
+using Microsoft.AspNetCore.Hosting.Server;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 using Serilog;
+using System;
 using System.Diagnostics;
+using System.Net.Http.Headers;
+using System.Reflection;
+using System.Net;
+using System.IO;
+using System.Net.Http;
+using System.Text.RegularExpressions;
+using Microsoft.Win32;
+using System.Security;
 
 namespace KioskRebornUpdater
 {
@@ -27,101 +39,116 @@ namespace KioskRebornUpdater
             return base.StopAsync(cancellationToken);
         }
 
+        // CREATE AN ARGUMENT IN THE INNO SETUP FILE -InstallUpdateService TO ALLOW TO NOT ATTEMPT TO OVERWRITE THIS RUNNING SERVICE DURING UPDATE
+
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            // calculate seconds till midnight
-            var now = DateTime.Now;
-            var hours = 23 - now.Hour;
-            var minutes = 59 - now.Minute;
-            var seconds = 59 - now.Second;
-            var secondsTillMidnight = hours * 3600 + minutes * 60 + seconds;
-
-            // wait till midnight
-           // await Task.Delay(TimeSpan.FromSeconds(secondsTillMidnight), stoppingToken);
-
             while (!stoppingToken.IsCancellationRequested)
             {
-                Log.Information("Checking for updates.");
+                Log.Information("Checking for updates");
 
-                string application = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "KioskReborn.exe");
-
-                if (!File.Exists(application))
-                {
-                    Log.Error("Could not located KioskReborn.exe");
-
-                    await Task.Delay(1000, stoppingToken);
-                    continue;
-                }
-
-              //  Settings settings = Settings.Get();
-
-                string path = Path.Combine(@"C:\Users\ttmonroe\OneDrive - Arvos Group\Documents\IDE Projects\Visual Studio\KioskReborn\KioskRebornSetup", "KioskReborn_Setup.exe"); 
-
-                if (!File.Exists(path))
-                {
-                    Log.Error("Could not located update files");
-
-                    await Task.Delay(1000, stoppingToken);
-                    continue;
-                }
-
-                FileVersionInfo versionInfo = FileVersionInfo.GetVersionInfo(application);
+                FileVersionInfo versionInfo = FileVersionInfo.GetVersionInfo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "KioskReborn.exe"));
                 Version currentVersion = Version.Parse(versionInfo.ProductVersion);
 
-                versionInfo = FileVersionInfo.GetVersionInfo(path);
-                Version updateVersion = Version.Parse(versionInfo.ProductVersion);
+                Log.Information("Current Version: " + currentVersion);
 
-                Console.WriteLine("Current Version: " + currentVersion);
-                Console.WriteLine("Available Version: " + updateVersion);
+                string update = await CheckForUpdate(currentVersion);
 
-                if (currentVersion < updateVersion)
+                if (update != string.Empty)
                 {
-                    Log.Information("Current Version: " + currentVersion);
-                    Log.Information("Available Version: " + updateVersion);
+                    bool relaunchApp = Process.GetProcessesByName("KioskReborn").Length != 0;
 
-                    //Process[] processes = Process.GetProcessesByName("KioskReborn");
+                    HttpClient httpClient = new HttpClient();
 
-                    //if (processes.Length != 0)
-                    //{
-                    //    foreach (Process p in processes)
-                    //    {
-                    //        p.Kill();
-                    //    }
-                    //}
+                    string path = Path.Combine(Path.GetTempPath(), "KioskReborn_Setup.exe");
+
+                    using (var stream = await httpClient.GetStreamAsync(update))
+                    {
+                        using (var fileStream = new FileStream(path, FileMode.CreateNew))
+                        {
+                            await stream.CopyToAsync(fileStream);
+                        }
+                    }
 
                     Process process = new Process();
 
-                    process.StartInfo.FileName = path;
+                    process.StartInfo.FileName = @"C:\Users\monroett\Documents\OneDrive - Arvos Group\Documents\IDE Projects\Visual Studio\KioskReborn\KioskRebornSetup\KioskReborn_Setup_v0.7.1.0.exe";
                     process.StartInfo.Arguments = "/SILENT";
                     process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
                     process.Start();
 
                     process.WaitForExit();
 
-                    //if(!ProcessExtensions.StartProcessAsCurrentUser(application))
-                    //{
-                    //    Log.Error("Failed to relaunch KioskReborn");
-                    //}
-
-                    try
+                    if (relaunchApp) 
                     {
-                        KioskReborn.RestartApp.Restart();
+                        LaunchApplication();
                     }
-                    catch (Exception ex)
-                    {
-                        Log.Error(ex.Message);
-                    }
-                    
-                }
-                else
+                } else
                 {
-                    Console.WriteLine("Up to date");
+                    Log.Information("KioskReborn is up to date!");
                 }
 
-                // wait 24 hours
-                //await Task.Delay(TimeSpan.FromHours(6), stoppingToken);
-                await Task.Delay(1000, stoppingToken);
+                await Task.Delay(1000 * 60, stoppingToken);
             }
+        }
+
+        private void LaunchApplication()
+        {
+            string domainName = (string)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "DefaultDomainName", string.Empty);
+            string userName = (string)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "DefaultUserName", string.Empty);
+            SecureString password = new NetworkCredential("", (string)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "DefaultPassword", string.Empty)).SecurePassword;
+
+            if (userName == string.Empty || password.Length == 0)
+            {
+                Log.Error("Cannot relaunch application. Autologin is not configured");
+            }
+            else
+            {
+                Process process = new Process();
+
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.FileName = @"C:\Program Files (x86)\KioskReborn\KioskReborn.exe";
+
+                if (domainName != string.Empty)
+                {
+                    process.StartInfo.Domain = domainName;
+                }
+
+                process.StartInfo.UserName = userName;
+                process.StartInfo.Password = password;
+                process.Start();
+            }
+        }
+
+        private async Task<string> CheckForUpdate(Version currentVersion)
+        {
+            HttpClient httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("MyApplication", "1"));
+
+            var contentsUrl = $"https://api.github.com/repos/trentech/KioskReborn/contents/KioskRebornSetup?ref=master";
+            var contentsJson = await httpClient.GetStringAsync(contentsUrl);
+            var contents = (JArray)JsonConvert.DeserializeObject(contentsJson);
+
+            foreach (var file in contents)
+            {
+                var name = (string)file["name"];
+
+                if (name.StartsWith("KioskReborn_Setup_"))
+                {
+                    Version latestVersion = Version.Parse(name.Replace("KioskReborn_Setup_", "").Replace(".exe", ""));
+
+                    if (currentVersion < latestVersion)
+                    { 
+                        Log.Information("New Version Available: " + latestVersion);
+
+                        return (string)file["download_url"];
+                    }
+
+                    return string.Empty;
+                }
+            }
+
+            return string.Empty;
         }
     }
 }

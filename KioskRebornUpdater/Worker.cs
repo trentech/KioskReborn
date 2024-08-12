@@ -1,16 +1,9 @@
-using KioskRebornLib;
-using Microsoft.AspNetCore.Hosting.Server;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using Serilog;
-using System;
 using System.Diagnostics;
 using System.Net.Http.Headers;
-using System.Reflection;
 using System.Net;
-using System.IO;
-using System.Net.Http;
-using System.Text.RegularExpressions;
 using Microsoft.Win32;
 using System.Security;
 
@@ -38,8 +31,6 @@ namespace KioskRebornUpdater
 
             return base.StopAsync(cancellationToken);
         }
-
-        // CREATE AN ARGUMENT IN THE INNO SETUP FILE -InstallUpdateService TO ALLOW TO NOT ATTEMPT TO OVERWRITE THIS RUNNING SERVICE DURING UPDATE
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {

@@ -5,11 +5,11 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>dotnet-KioskRebornUpdater-22aa67bb-cb17-49ab-a026-aa42c3e752e3</UserSecretsId>
-    <BaseOutputPath></BaseOutputPath>
+    <BaseOutputPath>..\KioskReborn\bin</BaseOutputPath>
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
 	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 	<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
-	<PlatformTarget>x86</PlatformTarget>
+	<PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>

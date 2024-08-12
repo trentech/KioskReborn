@@ -4,14 +4,15 @@
 #define MyAppName "KioskReborn"
 #define MyAppPublisher "terrence.monroe@ljungstrom.com"
 #define MyAppExeName "KioskReborn.exe"
-#define MyAppVersion GetVersionNumbersString("C:\Program Files (x86)\KioskReborn\KioskReborn.exe")
+#define MyAppVersion GetVersionNumbersString("C:\Program Files\KioskReborn\KioskReborn.exe")
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{E5E62A50-AE2E-41B6-8196-BA4D6D588544}
+AppId={{D9CED7E8-22E9-4E07-A762-2123F3A70BB9}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
+ArchitecturesInstallIn64BitMode=x64
 ;AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 DefaultDirName={autopf}\{#MyAppName}
@@ -32,8 +33,8 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Program Files (x86)\KioskReborn\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Program Files (x86)\KioskReborn\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Program Files\KioskReborn\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Program Files\KioskReborn\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
@@ -42,7 +43,7 @@ Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: de
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall runasoriginaluser; Check: CmdLineParamExists('/Launch')
-Filename: "sc"; Parameters: "create KioskRebornUpdater start= auto DisplayName= KioskRebornUpdater binPath= ""C:\Program Files (x86)\KioskReborn\KioskReborn.exe"""; Flags: runhidden postinstall; Check: CmdLineParamExists('/Service')
+Filename: "sc"; Parameters: "create KioskRebornUpdater start= auto DisplayName= KioskRebornUpdater binPath= ""C:\Program Files\KioskReborn\KioskRebornUpdater.exe"""; Flags: runhidden postinstall; Check: CmdLineParamExists('/Service')
 Filename: "sc"; Parameters: "config KioskRebornUpdater displayname= KioskRebornUpdater"; Flags: runhidden; Check: CmdLineParamExists('/Service')
 Filename: "sc"; Parameters: "start KioskRebornUpdater"; Flags: runhidden; Check: CmdLineParamExists('/Service')
 

@@ -93,7 +93,5 @@ namespace KioskReborn
 
             return bitmapImage;
         }
-
-
     }
 }

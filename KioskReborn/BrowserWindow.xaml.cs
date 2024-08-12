@@ -1,9 +1,12 @@
 ﻿using KioskRebornLib;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace KioskReborn
@@ -13,6 +16,9 @@ namespace KioskReborn
         public BrowserWindow(string URL)
         {
             InitializeComponent();
+
+            this.DataContext = this;
+            UpdateTouchStatus();
 
             string cache = Path.Combine(Settings.PATH, "cache");
 
@@ -93,6 +99,41 @@ namespace KioskReborn
         private void OnRefresh(object sender, EventArgs e)
         {
             webView.Reload();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private bool touchEnabled;
+        public bool TouchEnabled { get => this.touchEnabled; set { this.touchEnabled = value; OnPropertyChanged(); } }
+
+        private void UpdateTouchStatus()
+        {
+            if (HasTouchInput())
+            {
+                this.TouchEnabled = true;
+            }
+            else
+            {
+                this.TouchEnabled = false;
+            }
+        }
+
+        public bool HasTouchInput()
+        {
+            foreach (TabletDevice tabletDevice in Tablet.TabletDevices)
+            {
+                if (tabletDevice.Type == TabletDeviceType.Touch)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

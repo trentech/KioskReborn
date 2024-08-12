@@ -6,6 +6,8 @@ using System.Windows.Interop;
 using WindowsInput;
 using WindowsInput.Native;
 using KioskRebornLib;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace TouchKeyboard
 {
@@ -48,6 +50,9 @@ namespace TouchKeyboard
             }
 
             InitializeComponent();
+
+            this.DataContext = this;
+            UpdateTouchStatus();
 
             Left = (SystemParameters.PrimaryScreenWidth / 2) - (Width / 2);
             Top = SystemParameters.PrimaryScreenHeight - Height;
@@ -545,5 +550,40 @@ namespace TouchKeyboard
 
         [DllImport("user32.dll")]
         public static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private bool touchEnabled;
+        public bool TouchEnabled { get => this.touchEnabled; set { this.touchEnabled = value; OnPropertyChanged(); } }
+
+        private void UpdateTouchStatus()
+        {
+            if (HasTouchInput())
+            {
+                this.TouchEnabled = true;
+            }
+            else
+            {
+                this.TouchEnabled = false;
+            }
+        }
+
+        public bool HasTouchInput()
+        {
+            foreach (TabletDevice tabletDevice in Tablet.TabletDevices)
+            {
+                if (tabletDevice.Type == TabletDeviceType.Touch)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

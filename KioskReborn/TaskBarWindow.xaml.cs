@@ -18,6 +18,7 @@ using System.Reflection;
 using System.Windows.Media;
 using System.Drawing.Imaging;
 using KioskRebornLib;
+using System.ComponentModel;
 
 namespace KioskReborn
 {
@@ -35,6 +36,9 @@ namespace KioskReborn
         public TaskBarWindow()
         {
             InitializeComponent();
+
+            this.DataContext = this;
+            UpdateTouchStatus();
 
             Shutdown.ToolTip = "v" + Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
@@ -340,10 +344,39 @@ namespace KioskReborn
             public extern IntPtr ActivateForProtocol([In] String appUserModelId, [In] IntPtr itemArray, [Out] out UInt32 processId);
         }
 
-        private void OnMouseDown(object sender, MouseButtonEventArgs e)
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            Button button = e.OriginalSource as Button;
-            // IDK
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private bool touchEnabled;
+        public bool TouchEnabled { get => this.touchEnabled; set { this.touchEnabled = value; OnPropertyChanged(); } }
+
+        private void UpdateTouchStatus()
+        {
+            if (HasTouchInput())
+            {
+                this.TouchEnabled = true;
+            }
+            else
+            {
+                this.TouchEnabled = false;
+            }
+        }
+
+        public bool HasTouchInput()
+        {
+            foreach (TabletDevice tabletDevice in Tablet.TabletDevices)
+            {
+                if (tabletDevice.Type == TabletDeviceType.Touch)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

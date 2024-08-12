@@ -67,7 +67,7 @@ namespace KioskRebornUpdater
 
                     process.StartInfo.FileName = path;
                     process.StartInfo.Arguments = "/SILENT";
-                    process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
+                    process.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
                     process.Start();
 
                     process.WaitForExit();
@@ -110,7 +110,7 @@ namespace KioskRebornUpdater
                 Process process = new Process();
 
                 process.StartInfo.UseShellExecute = false;
-                process.StartInfo.FileName = @"C:\Program Files (x86)\KioskReborn\KioskReborn.exe";
+                process.StartInfo.FileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "KioskReborn.exe");
 
                 if (domainName != string.Empty)
                 {

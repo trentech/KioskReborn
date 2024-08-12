@@ -4,7 +4,7 @@
 #define MyAppName "KioskReborn"
 #define MyAppPublisher "terrence.monroe@ljungstrom.com"
 #define MyAppExeName "KioskReborn.exe"
-#define MyAppVersion GetVersionNumbersString("C:\Program Files\KioskReborn\KioskReborn.exe")
+#define MyAppVersion GetVersionNumbersString("C:\Users\ttmonroe\OneDrive - Arvos Group\Documents\IDE Projects\Visual Studio\KioskReborn\KioskReborn\bin\Debug\KioskReborn.exe")
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -33,11 +33,11 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Program Files\KioskReborn\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Program Files\KioskReborn\*"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Program Files\KioskReborn\Resources\*"; DestDir: "{app}\Resources"; Flags: ignoreversion
-Source: "C:\Program Files\KioskReborn\runtimes\*"; DestDir: "{app}\runtimes"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "C:\Program Files\KioskReborn\Update\*"; DestDir: "{app}\Update"; Flags: ignoreversion recursesubdirs createallsubdirs; Check: CmdLineParamExists('/Service')
+Source: "C:\Users\ttmonroe\OneDrive - Arvos Group\Documents\IDE Projects\Visual Studio\KioskReborn\KioskReborn\bin\Debug\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\ttmonroe\OneDrive - Arvos Group\Documents\IDE Projects\Visual Studio\KioskReborn\KioskReborn\bin\Debug\*"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\ttmonroe\OneDrive - Arvos Group\Documents\IDE Projects\Visual Studio\KioskReborn\KioskReborn\bin\Debug\Resources\*"; DestDir: "{app}\Resources"; Flags: ignoreversion
+Source: "C:\Users\ttmonroe\OneDrive - Arvos Group\Documents\IDE Projects\Visual Studio\KioskReborn\KioskReborn\bin\Debug\runtimes\*"; DestDir: "{app}\runtimes"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\ttmonroe\OneDrive - Arvos Group\Documents\IDE Projects\Visual Studio\KioskReborn\KioskRebornUpdater\bin\Debug\*"; DestDir: "{app}\Update"; Flags: ignoreversion recursesubdirs createallsubdirs; Check: CmdLineParamExists('/Service')
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"

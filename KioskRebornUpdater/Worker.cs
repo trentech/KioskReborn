@@ -34,6 +34,8 @@ namespace KioskRebornUpdater
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+
+
             while (!stoppingToken.IsCancellationRequested)
             {
                 Log.Information("Checking for updates");
@@ -55,7 +57,7 @@ namespace KioskRebornUpdater
 
                     using (var stream = await httpClient.GetStreamAsync(update))
                     {
-                        using (var fileStream = new FileStream(path, FileMode.CreateNew))
+                        using (var fileStream = new FileStream(path, FileMode.Create))
                         {
                             await stream.CopyToAsync(fileStream);
                         }
@@ -70,6 +72,8 @@ namespace KioskRebornUpdater
 
                     process.WaitForExit();
 
+                    File.Delete(path);
+
                     if (relaunchApp) 
                     {
                         LaunchApplication();
@@ -79,7 +83,15 @@ namespace KioskRebornUpdater
                     Log.Information("KioskReborn is up to date!");
                 }
 
-                await Task.Delay(1000 * 60, stoppingToken);
+                var now = DateTime.Now;
+                var hours = 23 - now.Hour;
+                var minutes = 59 - now.Minute;
+                var seconds = 59 - now.Second;
+                var secondsTillMidnight = hours * 3600 + minutes * 60 + seconds;
+
+                // wait till midnight
+                await Task.Delay(TimeSpan.FromSeconds(secondsTillMidnight), stoppingToken);
+                //await Task.Delay(1000 * 60, stoppingToken);
             }
         }
 

@@ -40,7 +40,9 @@ namespace KioskRebornUpdater
             {
                 Log.Information("Checking for updates");
 
-                FileVersionInfo versionInfo = FileVersionInfo.GetVersionInfo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "KioskReborn.exe"));
+                string appPath = new FileInfo(AppDomain.CurrentDomain.BaseDirectory).Directory.Parent.FullName;
+
+                FileVersionInfo versionInfo = FileVersionInfo.GetVersionInfo(Path.Combine(appPath, "KioskReborn.exe"));
                 Version currentVersion = Version.Parse(versionInfo.ProductVersion);
 
                 Log.Information("Current Version: " + currentVersion);
@@ -79,7 +81,7 @@ namespace KioskRebornUpdater
 
                     if (relaunchApp) 
                     {
-                        LaunchApplication();
+                        LaunchApplication(appPath);
                     }
                 } else
                 {
@@ -98,7 +100,7 @@ namespace KioskRebornUpdater
             }
         }
 
-        private void LaunchApplication()
+        private void LaunchApplication(string path)
         {
             string domainName = (string)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "DefaultDomainName", string.Empty);
             string userName = (string)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "DefaultUserName", string.Empty);
@@ -113,7 +115,7 @@ namespace KioskRebornUpdater
                 Process process = new Process();
 
                 process.StartInfo.UseShellExecute = false;
-                process.StartInfo.FileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "KioskReborn.exe");
+                process.StartInfo.FileName = Path.Combine(path, "KioskReborn.exe");
 
                 if (domainName != string.Empty)
                 {

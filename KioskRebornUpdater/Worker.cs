@@ -72,7 +72,7 @@ namespace KioskRebornUpdater
 
                     Process process = new Process();
 
-                    process.StartInfo.FileName = @"C:\Users\monroett\Documents\OneDrive - Arvos Group\Documents\IDE Projects\Visual Studio\KioskReborn\KioskRebornSetup\KioskReborn_Setup_v0.7.1.0.exe";
+                    process.StartInfo.FileName = path;
                     process.StartInfo.Arguments = "/SILENT";
                     process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
                     process.Start();

@@ -20,7 +20,7 @@ DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 OutputDir=C:\Users\ttmonroe\OneDrive - Arvos Group\Documents\IDE Projects\Visual Studio\KioskReborn\KioskRebornSetup
-OutputBaseFilename=KioskReborn_Setup
+OutputBaseFilename=KioskReborn_Setup_{#MyAppVersion}
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -41,6 +41,25 @@ Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
 [Run]
-Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
-;Filename: "sc"; Parameters: "create KioskRebornUpdater start= auto DisplayName= KioskRebornUpdater binPath= ""C:\Program Files (x86)\KioskReborn\KioskReborn.exe"""; Flags: runascurrentuser runhidden
+Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall runasoriginaluser; Check: CmdLineParamExists('/Launch')
+Filename: "sc"; Parameters: "create KioskRebornUpdater start= auto DisplayName= KioskRebornUpdater binPath= ""C:\Program Files (x86)\KioskReborn\KioskReborn.exe"""; Flags: runhidden postinstall; Check: CmdLineParamExists('/Service')
+Filename: "sc"; Parameters: "config KioskRebornUpdater displayname= KioskRebornUpdater"; Flags: runhidden; Check: CmdLineParamExists('/Service')
+Filename: "sc"; Parameters: "start KioskRebornUpdater"; Flags: runhidden; Check: CmdLineParamExists('/Service')
 
+[UninstallRun]
+Filename: "sc"; Parameters: "stop KioskRebornUpdater"; Flags: runhidden;
+Filename: "sc"; Parameters: "delete KioskRebornUpdater"; Flags: runhidden;
+
+[Code]
+function CmdLineParamExists(const Value: string): Boolean;
+var
+  I: Integer;  
+begin
+  Result := False;
+  for I := 1 to ParamCount do
+    if CompareText(ParamStr(I), Value) = 0 then
+    begin
+      Result := True;
+      Exit;
+    end;
+end;

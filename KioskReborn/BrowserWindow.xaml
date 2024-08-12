@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:KioskReborn"
         xmlns:Wpf="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf" x:Name="Browser" x:Class="KioskReborn.BrowserWindow"
         mc:Ignorable="d"
-        Title="Browser" Height="450" Width="800" WindowStyle="None" Top="0" Left="0" ResizeMode="NoResize" Style="{DynamicResource Window}" Focusable="True">
+        Title="Browser" Height="450" Width="800" WindowStyle="None" Top="0" Left="0" ResizeMode="NoResize" Style="{DynamicResource Window}" Focusable="True" ShowInTaskbar="False">
     <DockPanel Name="MainPanel" >
         <Grid DockPanel.Dock="Top" Name="ToolBar" FlowDirection="RightToLeft" ShowGridLines="False" Height="50">
             <Grid.ColumnDefinitions>

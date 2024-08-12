@@ -59,15 +59,18 @@ namespace KioskRebornUpdater
                     {
                         using (var fileStream = new FileStream(path, FileMode.Create))
                         {
-                            await stream.CopyToAsync(fileStream);
+                            Log.Information("Downloading update");
+                            stream.CopyTo(fileStream);
                         }
                     }
+
+                    Log.Information("Installing update");
 
                     Process process = new Process();
 
                     process.StartInfo.FileName = path;
-                    process.StartInfo.Arguments = "/SILENT";
-                    process.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
+                    process.StartInfo.Arguments = "/VERYSILENT";
+
                     process.Start();
 
                     process.WaitForExit();

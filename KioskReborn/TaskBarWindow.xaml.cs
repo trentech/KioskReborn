@@ -185,6 +185,12 @@ namespace KioskReborn
                 TaskbarGrid.Children.Add(button);
                 Grid.SetColumn(button, TaskbarGrid.ColumnDefinitions.Count - 1);
                 Taskbar.Width = Taskbar.Width + 50;
+
+                if (settings.Browser.AutoStart)
+                {
+                    BrowserWindow browser = new BrowserWindow(settings.Browser.URL);
+                    browser.Show();
+                }
             }
         }
 

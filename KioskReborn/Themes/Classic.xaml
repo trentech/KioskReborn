@@ -2,9 +2,76 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style TargetType="Button" x:Key="TaskbarButton">
         <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="#a4d3ee"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
         <Style.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=IsMouseOver}" Value="True"/>
+                    <Condition Binding="{Binding TouchEnabled}" Value="False"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="BorderThickness" Duration="0:0:5" FillBehavior="HoldEnd">
+                                <ThicknessAnimationUsingKeyFrames.KeyFrames>
+                                    <LinearThicknessKeyFrame KeyTime="0:0:0.2">
+                                        <LinearThicknessKeyFrame.Value>
+                                            <Thickness Left="2" Right="2" Top="2" Bottom="2" />
+                                        </LinearThicknessKeyFrame.Value>
+                                    </LinearThicknessKeyFrame>
+                                </ThicknessAnimationUsingKeyFrames.KeyFrames>
+                            </ThicknessAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiDataTrigger.EnterActions>
+                <MultiDataTrigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="BorderThickness" Duration="0:0:5" FillBehavior="HoldEnd">
+                                <ThicknessAnimationUsingKeyFrames.KeyFrames>
+                                    <LinearThicknessKeyFrame KeyTime="0:0:0.2">
+                                        <LinearThicknessKeyFrame.Value>
+                                            <Thickness Left="0" Right="0" Top="0" Bottom="0" />
+                                        </LinearThicknessKeyFrame.Value>
+                                    </LinearThicknessKeyFrame>
+                                </ThicknessAnimationUsingKeyFrames.KeyFrames>
+                            </ThicknessAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiDataTrigger.ExitActions>
+            </MultiDataTrigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Margin" Value="5"></Setter>
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation To="#a4d3ee" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" BeginTime="00:00:0.0" Duration="00:00:0.1"/>
+                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
+                                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="2" />
+                                <SplineThicknessKeyFrame KeyTime="00:00:0.2" Value="5" />
+                            </ThicknessAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation To="White" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" BeginTime="00:00:0.2" Duration="00:00:0.1"/>
+                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
+                                <SplineThicknessKeyFrame KeyTime="00:00:0.2" Value="5" />
+                                <SplineThicknessKeyFrame KeyTime="00:00:0.4" Value="2" />
+                            </ThicknessAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
             </Trigger>
             <Trigger Property="IsPressed" Value="False">
                 <Setter Property="Margin" Value="2"></Setter>
@@ -14,9 +81,76 @@
     
     <Style TargetType="Button" x:Key="TaskbarAppButton">
         <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="#a4d3ee"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" Padding="5,5" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
         <Style.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=IsMouseOver}" Value="True"/>
+                    <Condition Binding="{Binding TouchEnabled}" Value="False"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="BorderThickness" Duration="0:0:5" FillBehavior="HoldEnd">
+                                <ThicknessAnimationUsingKeyFrames.KeyFrames>
+                                    <LinearThicknessKeyFrame KeyTime="0:0:0.2">
+                                        <LinearThicknessKeyFrame.Value>
+                                            <Thickness Left="2" Right="2" Top="2" Bottom="2" />
+                                        </LinearThicknessKeyFrame.Value>
+                                    </LinearThicknessKeyFrame>
+                                </ThicknessAnimationUsingKeyFrames.KeyFrames>
+                            </ThicknessAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiDataTrigger.EnterActions>
+                <MultiDataTrigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="BorderThickness" Duration="0:0:5" FillBehavior="HoldEnd">
+                                <ThicknessAnimationUsingKeyFrames.KeyFrames>
+                                    <LinearThicknessKeyFrame KeyTime="0:0:0.2">
+                                        <LinearThicknessKeyFrame.Value>
+                                            <Thickness Left="0" Right="0" Top="0" Bottom="0" />
+                                        </LinearThicknessKeyFrame.Value>
+                                    </LinearThicknessKeyFrame>
+                                </ThicknessAnimationUsingKeyFrames.KeyFrames>
+                            </ThicknessAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiDataTrigger.ExitActions>
+            </MultiDataTrigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Margin" Value="5"></Setter>
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation To="#a4d3ee" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" BeginTime="00:00:0.0" Duration="00:00:0.1"/>
+                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
+                                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="2" />
+                                <SplineThicknessKeyFrame KeyTime="00:00:0.2" Value="5" />
+                            </ThicknessAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation To="White" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" BeginTime="00:00:0.2" Duration="00:00:0.1"/>
+                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
+                                <SplineThicknessKeyFrame KeyTime="00:00:0.2" Value="5" />
+                                <SplineThicknessKeyFrame KeyTime="00:00:0.4" Value="2" />
+                            </ThicknessAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
             </Trigger>
             <Trigger Property="IsPressed" Value="False">
                 <Setter Property="Margin" Value="2"></Setter>
@@ -26,9 +160,60 @@
     
     <Style TargetType="Button" x:Key="BrowserButtonFavorite">
         <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="#636363"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderThickness="2,2,2,2" BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
         <Style.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=IsMouseOver}" Value="True"/>
+                    <Condition Binding="{Binding TouchEnabled}" Value="False"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation To="#a4d3ee" Storyboard.TargetProperty="(Button.BorderBrush).(SolidColorBrush.Color)" BeginTime="00:00:0.0" Duration="00:00:0.2"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiDataTrigger.EnterActions>
+                <MultiDataTrigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation To="#636363" Storyboard.TargetProperty="(Button.BorderBrush).(SolidColorBrush.Color)" BeginTime="00:00:0.0" Duration="00:00:0.2"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiDataTrigger.ExitActions>
+            </MultiDataTrigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Margin" Value="5"></Setter>
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation To="#a4d3ee" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" BeginTime="00:00:0.0" Duration="00:00:0.1"/>
+                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
+                                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="2" />
+                                <SplineThicknessKeyFrame KeyTime="00:00:0.2" Value="5" />
+                            </ThicknessAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation To="White" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" BeginTime="00:00:0.2" Duration="00:00:0.1"/>
+                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
+                                <SplineThicknessKeyFrame KeyTime="00:00:0.2" Value="5" />
+                                <SplineThicknessKeyFrame KeyTime="00:00:0.4" Value="2" />
+                            </ThicknessAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
             </Trigger>
             <Trigger Property="IsPressed" Value="False">
                 <Setter Property="Margin" Value="2"></Setter>
@@ -39,9 +224,77 @@
     <Style TargetType="TextBlock" x:Key="BrowserTextFavorite"></Style>
     
     <Style TargetType="RepeatButton" x:Key="KeyboardButton">
+        <Setter Property="Background" Value="#dbdbdb"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
         <Style.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=IsMouseOver}" Value="True"/>
+                    <Condition Binding="{Binding TouchEnabled}" Value="False"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation To="#a4d3ee" Storyboard.TargetProperty="(Button.BorderBrush).(SolidColorBrush.Color)" BeginTime="00:00:0.0" Duration="00:00:0.2"/>
+                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="BorderThickness" Duration="0:0:5" FillBehavior="HoldEnd">
+                                <ThicknessAnimationUsingKeyFrames.KeyFrames>
+                                    <LinearThicknessKeyFrame KeyTime="0:0:0.2">
+                                        <LinearThicknessKeyFrame.Value>
+                                            <Thickness Left="2" Right="2" Top="2" Bottom="2" />
+                                        </LinearThicknessKeyFrame.Value>
+                                    </LinearThicknessKeyFrame>
+                                </ThicknessAnimationUsingKeyFrames.KeyFrames>
+                            </ThicknessAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiDataTrigger.EnterActions>
+                <MultiDataTrigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="BorderThickness" Duration="0:0:5" FillBehavior="HoldEnd">
+                                <ThicknessAnimationUsingKeyFrames.KeyFrames>
+                                    <LinearThicknessKeyFrame KeyTime="0:0:0.2">
+                                        <LinearThicknessKeyFrame.Value>
+                                            <Thickness Left="0" Right="0" Top="0" Bottom="0" />
+                                        </LinearThicknessKeyFrame.Value>
+                                    </LinearThicknessKeyFrame>
+                                </ThicknessAnimationUsingKeyFrames.KeyFrames>
+                            </ThicknessAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiDataTrigger.ExitActions>
+            </MultiDataTrigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Margin" Value="6"></Setter>
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation To="#a4d3ee" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" BeginTime="00:00:0.0" Duration="00:00:0.1"/>
+                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
+                                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="3" />
+                                <SplineThicknessKeyFrame KeyTime="00:00:0.2" Value="6" />
+                            </ThicknessAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation To="#dbdbdb" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" BeginTime="00:00:0.2" Duration="00:00:0.1"/>
+                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
+                                <SplineThicknessKeyFrame KeyTime="00:00:0.2" Value="6" />
+                                <SplineThicknessKeyFrame KeyTime="00:00:0.4" Value="3" />
+                            </ThicknessAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
             </Trigger>
             <Trigger Property="IsPressed" Value="False">
                 <Setter Property="Margin" Value="3"></Setter>
@@ -50,20 +303,153 @@
     </Style>
 
     <Style TargetType="RepeatButton" x:Key="KeyboardButtonShift">
+        <Setter Property="Background" Value="#a4d3ee"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
         <Style.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=IsMouseOver}" Value="True"/>
+                    <Condition Binding="{Binding TouchEnabled}" Value="False"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation To="#dbdbdb" Storyboard.TargetProperty="(Button.BorderBrush).(SolidColorBrush.Color)" BeginTime="00:00:0.0" Duration="00:00:0.2"/>
+                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="BorderThickness" Duration="0:0:5" FillBehavior="HoldEnd">
+                                <ThicknessAnimationUsingKeyFrames.KeyFrames>
+                                    <LinearThicknessKeyFrame KeyTime="0:0:0.2">
+                                        <LinearThicknessKeyFrame.Value>
+                                            <Thickness Left="2" Right="2" Top="2" Bottom="2" />
+                                        </LinearThicknessKeyFrame.Value>
+                                    </LinearThicknessKeyFrame>
+                                </ThicknessAnimationUsingKeyFrames.KeyFrames>
+                            </ThicknessAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiDataTrigger.EnterActions>
+                <MultiDataTrigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="BorderThickness" Duration="0:0:5" FillBehavior="HoldEnd">
+                                <ThicknessAnimationUsingKeyFrames.KeyFrames>
+                                    <LinearThicknessKeyFrame KeyTime="0:0:0.2">
+                                        <LinearThicknessKeyFrame.Value>
+                                            <Thickness Left="0" Right="0" Top="0" Bottom="0" />
+                                        </LinearThicknessKeyFrame.Value>
+                                    </LinearThicknessKeyFrame>
+                                </ThicknessAnimationUsingKeyFrames.KeyFrames>
+                            </ThicknessAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiDataTrigger.ExitActions>
+            </MultiDataTrigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Margin" Value="6"></Setter>
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation To="#dbdbdb" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" BeginTime="00:00:0.0" Duration="00:00:0.1"/>
+                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
+                                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="3" />
+                                <SplineThicknessKeyFrame KeyTime="00:00:0.2" Value="6" />
+                                <SplineThicknessKeyFrame KeyTime="00:00:0.4" Value="3" />
+                            </ThicknessAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation To="#a4d3ee" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" BeginTime="00:00:0.2" Duration="00:00:0.1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
             </Trigger>
             <Trigger Property="IsPressed" Value="False">
                 <Setter Property="Margin" Value="3"></Setter>
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+
     <Style TargetType="Button" x:Key="BrowserButton">
+        <Setter Property="Background" Value="#dbdbdb"/>
+        <Setter Property="BorderBrush" Value="#a4d3ee"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
         <Style.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=IsMouseOver}" Value="True"/>
+                    <Condition Binding="{Binding TouchEnabled}" Value="False"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="BorderThickness" Duration="0:0:5" FillBehavior="HoldEnd">
+                                <ThicknessAnimationUsingKeyFrames.KeyFrames>
+                                    <LinearThicknessKeyFrame KeyTime="0:0:0.2">
+                                        <LinearThicknessKeyFrame.Value>
+                                            <Thickness Left="2" Right="2" Top="2" Bottom="2" />
+                                        </LinearThicknessKeyFrame.Value>
+                                    </LinearThicknessKeyFrame>
+                                </ThicknessAnimationUsingKeyFrames.KeyFrames>
+                            </ThicknessAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiDataTrigger.EnterActions>
+                <MultiDataTrigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="BorderThickness" Duration="0:0:5" FillBehavior="HoldEnd">
+                                <ThicknessAnimationUsingKeyFrames.KeyFrames>
+                                    <LinearThicknessKeyFrame KeyTime="0:0:0.2">
+                                        <LinearThicknessKeyFrame.Value>
+                                            <Thickness Left="0" Right="0" Top="0" Bottom="0" />
+                                        </LinearThicknessKeyFrame.Value>
+                                    </LinearThicknessKeyFrame>
+                                </ThicknessAnimationUsingKeyFrames.KeyFrames>
+                            </ThicknessAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiDataTrigger.ExitActions>
+            </MultiDataTrigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Margin" Value="5"></Setter>
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation To="#a4d3ee" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" BeginTime="00:00:0.0" Duration="00:00:0.1"/>
+                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
+                                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="2" />
+                                <SplineThicknessKeyFrame KeyTime="00:00:0.2" Value="5" />
+                            </ThicknessAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation To="#dbdbdb" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" BeginTime="00:00:0.2" Duration="00:00:0.1"/>
+                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
+                                <SplineThicknessKeyFrame KeyTime="00:00:0.2" Value="5" />
+                                <SplineThicknessKeyFrame KeyTime="00:00:0.4" Value="2" />
+                            </ThicknessAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
             </Trigger>
             <Trigger Property="IsPressed" Value="False">
                 <Setter Property="Margin" Value="2"></Setter>

@@ -3,6 +3,7 @@
     
     <Style TargetType="Button" x:Key="TaskbarButton">
         <Setter Property="Background" Value="#727376"/>
+		<Setter Property="BorderBrush" Value="#85bb2d"/>							
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -21,7 +22,6 @@
                 <MultiDataTrigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation To="#85bb2d" Storyboard.TargetProperty="(Button.BorderBrush).(SolidColorBrush.Color)" BeginTime="00:00:0.0" Duration="00:00:0.2"/>
                             <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="BorderThickness" Duration="0:0:5" FillBehavior="HoldEnd">
                                 <ThicknessAnimationUsingKeyFrames.KeyFrames>
                                     <LinearThicknessKeyFrame KeyTime="0:0:0.2">
@@ -76,13 +76,13 @@
             </Trigger>
             <Trigger Property="IsPressed" Value="False">
                 <Setter Property="Margin" Value="2"></Setter>
-                <Setter Property="BorderThickness" Value="0"/>
             </Trigger>
         </Style.Triggers>
     </Style>
 
     <Style TargetType="Button" x:Key="TaskbarAppButton">
         <Setter Property="Background" Value="#727376"/>
+        <Setter Property="BorderBrush" Value="#85bb2d"/>														
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -101,7 +101,6 @@
                 <MultiDataTrigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation To="#85bb2d" Storyboard.TargetProperty="(Button.BorderBrush).(SolidColorBrush.Color)" BeginTime="00:00:0.0" Duration="00:00:0.2"/>
                             <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="BorderThickness" Duration="0:0:5" FillBehavior="HoldEnd">
                                 <ThicknessAnimationUsingKeyFrames.KeyFrames>
                                     <LinearThicknessKeyFrame KeyTime="0:0:0.2">
@@ -381,9 +380,10 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+
     <Style TargetType="Button" x:Key="BrowserButton">
         <Setter Property="Background" Value="#c9c9c9"/>
+        <Setter Property="BorderBrush" Value="#85bb2d"/>														
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -402,7 +402,6 @@
                 <MultiDataTrigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation To="#85bb2d" Storyboard.TargetProperty="(Button.BorderBrush).(SolidColorBrush.Color)" BeginTime="00:00:0.0" Duration="00:00:0.2"/>
                             <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="BorderThickness" Duration="0:0:5" FillBehavior="HoldEnd">
                                 <ThicknessAnimationUsingKeyFrames.KeyFrames>
                                     <LinearThicknessKeyFrame KeyTime="0:0:0.2">
@@ -437,8 +436,8 @@
                         <Storyboard>
                             <ColorAnimation To="#78b03c" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" BeginTime="00:00:0.0" Duration="00:00:0.1"/>
                             <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
-                                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="3" />
-                                <SplineThicknessKeyFrame KeyTime="00:00:0.2" Value="6" />
+                                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="2" />
+                                <SplineThicknessKeyFrame KeyTime="00:00:0.2" Value="5" />
                             </ThicknessAnimationUsingKeyFrames>
                         </Storyboard>
                     </BeginStoryboard>
@@ -448,8 +447,8 @@
                         <Storyboard>
                             <ColorAnimation To="#c9c9c9" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" BeginTime="00:00:0.2" Duration="00:00:0.1"/>
                             <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
-                                <SplineThicknessKeyFrame KeyTime="00:00:0.2" Value="6" />
-                                <SplineThicknessKeyFrame KeyTime="00:00:0.4" Value="3" />
+                                <SplineThicknessKeyFrame KeyTime="00:00:0.2" Value="5" />
+                                <SplineThicknessKeyFrame KeyTime="00:00:0.4" Value="2" />
                             </ThicknessAnimationUsingKeyFrames>
                         </Storyboard>
                     </BeginStoryboard>

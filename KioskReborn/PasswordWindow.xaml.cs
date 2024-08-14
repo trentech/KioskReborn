@@ -34,18 +34,20 @@ namespace KioskReborn
         {
             if (TextPasswd.Password == File.ReadAllText(System.IO.Path.Combine(Settings.PATH, "passwd")))
             {
-                Process process = new Process();
-                ProcessStartInfo processStartInfo = new ProcessStartInfo();
-                processStartInfo.FileName = @"cmd.exe";
-                processStartInfo.Arguments = "/c \"" + System.IO.Path.Combine(AppContext.BaseDirectory, @"Resources\elevate.bat") + "\" cmd.exe"; //FIX PATH TO ELEVATE
-                processStartInfo.UseShellExecute = true;
-                process.StartInfo = processStartInfo;
+                Shell.Show();
 
-                ThreadStart threadStart = new ThreadStart(() => process.Start());
-                Thread thread = new Thread(threadStart);
-                thread.Start();
+                //Process process = new Process();
+                //ProcessStartInfo processStartInfo = new ProcessStartInfo();
+                //processStartInfo.FileName = @"cmd.exe";
+                //processStartInfo.Arguments = "/c \"" + System.IO.Path.Combine(AppContext.BaseDirectory, @"Resources\elevate.bat") + "\" cmd.exe"; //FIX PATH TO ELEVATE
+                //processStartInfo.UseShellExecute = true;
+                //process.StartInfo = processStartInfo;
 
-                this.Close();
+                //ThreadStart threadStart = new ThreadStart(() => process.Start());
+                //Thread thread = new Thread(threadStart);
+                //thread.Start();
+
+                //this.Close();
             }
             else
             {

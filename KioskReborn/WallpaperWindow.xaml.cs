@@ -13,6 +13,8 @@ namespace KioskReborn
     {
         public WallpaperWindow()
         {
+            Shell.Hide();
+
             string images = Path.Combine(Settings.PATH, "Images");
 
             if (!Directory.Exists(images))
@@ -92,6 +94,11 @@ namespace KioskReborn
             bitmapImage.EndInit();
 
             return bitmapImage;
+        }
+
+        private void OnClose(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Shell.Show();
         }
     }
 }

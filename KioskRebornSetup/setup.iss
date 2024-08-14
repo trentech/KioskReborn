@@ -4,7 +4,7 @@
 #define MyAppName "KioskReborn"
 #define MyAppPublisher "terrence.monroe@ljungstrom.com"
 #define MyAppExeName "KioskReborn.exe"
-#define MyAppVersion GetVersionNumbersString("..\KioskReborn\bin\Debug\KioskReborn.exe")
+#define MyAppVersion GetVersionNumbersString("..\KioskReborn\bin\Release\KioskReborn.exe")
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -33,11 +33,11 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "..\KioskReborn\bin\Debug\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\KioskReborn\bin\Debug\*"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\KioskReborn\bin\Debug\Resources\*"; DestDir: "{app}\Resources"; Flags: ignoreversion
-Source: "..\KioskReborn\bin\Debug\runtimes\*"; DestDir: "{app}\runtimes"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "..\KioskRebornUpdater\bin\Debug\*"; DestDir: "{app}\Update"; Flags: ignoreversion recursesubdirs createallsubdirs; Check: CmdLineParamExists('/Service')
+Source: "..\KioskReborn\bin\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\KioskReborn\bin\Release\*"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\KioskReborn\bin\Release\Resources\*"; DestDir: "{app}\Resources"; Flags: ignoreversion
+Source: "..\KioskReborn\bin\Release\runtimes\*"; DestDir: "{app}\runtimes"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\KioskRebornTask\bin\Release\*"; DestDir: "{app}\Update"; Flags: ignoreversion recursesubdirs createallsubdirs; Check: CmdLineParamExists('/Service')
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
@@ -45,13 +45,17 @@ Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: de
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall runasoriginaluser; Check: CmdLineParamExists('/Launch')
-Filename: "sc"; Parameters: "create KioskRebornUpdater start= auto DisplayName= KioskRebornUpdater binPath= ""C:\Program Files\KioskReborn\Update\KioskRebornUpdater.exe"""; Flags: runhidden postinstall; Check: CmdLineParamExists('/Service')
-Filename: "sc"; Parameters: "config KioskRebornUpdater displayname= KioskRebornUpdater"; Flags: runhidden; Check: CmdLineParamExists('/Service')
-Filename: "sc"; Parameters: "start KioskRebornUpdater"; Flags: runhidden; Check: CmdLineParamExists('/Service')
+Filename: "powershell.exe"; Parameters: "-ExecutionPolicy Bypass -Command $Trigger = New-ScheduledTaskTrigger -Daily -At ""00:00:00""; $Action = New-ScheduledTaskAction -Execute 'C:\Program Files\KioskReborn\Update\KioskRebornTask.exe'; Register-ScheduledTask -TaskName ""KioskRebornUpdate"" -Trigger $Trigger -Action $Action -User ""SYSTEM"" -RunLevel Highest;"; \
+WorkingDir: {app}; Flags: runhidden; Check: CmdLineParamExists('/Service')
+
+;Filename: "sc"; Parameters: "create KioskRebornUpdater start= auto DisplayName= KioskRebornUpdater binPath= ""C:\Program Files\KioskReborn\Update\KioskRebornUpdater.exe"""; Flags: runhidden postinstall; Check: CmdLineParamExists('/Service')
+;Filename: "sc"; Parameters: "config KioskRebornUpdater displayname= KioskRebornUpdater"; Flags: runhidden; Check: CmdLineParamExists('/Service')
+;Filename: "sc"; Parameters: "start KioskRebornUpdater"; Flags: runhidden; Check: CmdLineParamExists('/Service')
 
 [UninstallRun]
-Filename: "sc"; Parameters: "stop KioskRebornUpdater"; Flags: runhidden;
-Filename: "sc"; Parameters: "delete KioskRebornUpdater"; Flags: runhidden;
+Filename: "powershell.exe"; Parameters: "-ExecutionPolicy Bypass -Command Unregister-ScheduledTask -TaskName ""KioskRebornUpdate"" -Confirm:$false"; WorkingDir: {app}; Flags: runhidden;
+;Filename: "sc"; Parameters: "stop KioskRebornUpdater"; Flags: runhidden;
+;Filename: "sc"; Parameters: "delete KioskRebornUpdater"; Flags: runhidden;
 
 [Code]
 function CmdLineParamExists(const Value: string): Boolean;

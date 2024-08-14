@@ -64,10 +64,19 @@ namespace KioskRebornTask
 
                 Log.Information("Installing update");
 
+                Process[] explorer = Process.GetProcessesByName("KioskReborn");
+
+                foreach (Process p in explorer)
+                {
+                    p.Kill();
+                }
+
+                Thread.Sleep(1000);
+
                 Process process = new Process();
 
                 process.StartInfo.FileName = path;
-                process.StartInfo.Arguments = "/VERYSILENT";
+                process.StartInfo.Arguments = "/SILENT";
 
                 process.Start();
 
@@ -77,7 +86,7 @@ namespace KioskRebornTask
 
                 if (relaunchApp)
                 {
-                    LaunchApplication(appPath);
+                    RestartComputer();
                 }
             }
             else
@@ -86,8 +95,21 @@ namespace KioskRebornTask
             }
         }
 
+        static void RestartComputer()
+        {
+            ProcessStartInfo process = new ProcessStartInfo();
+
+            process.FileName = "cmd";
+            process.WindowStyle = ProcessWindowStyle.Hidden;
+            process.Arguments = "/C shutdown -f -r -t 0";
+
+            Process.Start(process);
+        }
+
         static void LaunchApplication(string path)
         {
+            Log.Information("Relaunching applications");
+
             string domainName = (string)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "DefaultDomainName", string.Empty);
             string userName = (string)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "DefaultUserName", string.Empty);
             SecureString password = new NetworkCredential("", (string)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "DefaultPassword", string.Empty)).SecurePassword;
@@ -98,19 +120,20 @@ namespace KioskRebornTask
             }
             else
             {
-                Process process = new Process();
+                ProcessStartInfo process = new ProcessStartInfo();
 
-                process.StartInfo.UseShellExecute = false;
-                process.StartInfo.FileName = Path.Combine(path, "KioskReborn.exe");
+                process.UseShellExecute = false;
+                process.FileName = Path.Combine(path, "KioskReborn.exe");
 
                 if (domainName != string.Empty)
                 {
-                    process.StartInfo.Domain = domainName;
+                    process.Domain = domainName;
                 }
 
-                process.StartInfo.UserName = userName;
-                process.StartInfo.Password = password;
-                process.Start();
+                process.WorkingDirectory = path;
+                process.UserName = userName;
+                process.Password = password;
+                Process.Start(process);
             }
         }
         static async Task<string> CheckForUpdate(Version currentVersion)

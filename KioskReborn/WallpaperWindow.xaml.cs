@@ -29,6 +29,8 @@ namespace KioskReborn
             ImageBrush brush = new ImageBrush();
             brush.ImageSource = ConvertImage(Image.FromFile(settings.Background));
             Background = brush;
+
+            SendWindow(this, true);
         }
 
         public static ImageSource ConvertImage(System.Drawing.Image image)
@@ -66,11 +68,19 @@ namespace KioskReborn
         const UInt32 SWP_NOACTIVATE = 0x0010;
 
         static readonly IntPtr HWND_BOTTOM = new IntPtr(1);
+        static readonly IntPtr HWND_TOP = new IntPtr(0);
 
-        static void SendWpfWindowBack(Window window)
+        static void SendWindow(Window window, bool back)
         {
-            var hWnd = new WindowInteropHelper(window).Handle;
-            SetWindowPos(hWnd, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE);
+            IntPtr hWnd = new WindowInteropHelper(window).Handle;
+
+            if (back)
+            {
+                SetWindowPos(hWnd, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE);
+            }
+            else {
+                SetWindowPos(hWnd, HWND_TOP, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE);
+            }
         }
     }
 }

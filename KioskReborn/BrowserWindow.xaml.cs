@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 
 namespace KioskReborn
@@ -18,7 +20,7 @@ namespace KioskReborn
             InitializeComponent();
 
             this.DataContext = this;
-            UpdateTouchStatus();
+           UpdateTouchStatus();
 
             string cache = Path.Combine(Settings.PATH, "cache");
 
@@ -76,6 +78,9 @@ namespace KioskReborn
                 ToolBar.Children.Add(button);
                 Grid.SetColumn(button, ToolBar.ColumnDefinitions.Count - 1);
             }
+
+            Activate();
+            Focus();
         }
 
         private void OnBack(object sender, EventArgs e)
@@ -134,6 +139,28 @@ namespace KioskReborn
             }
 
             return false;
+        }
+
+        [DllImport("user32.dll")]
+        static extern bool SetWindowPos(
+    IntPtr hWnd,
+    IntPtr hWndInsertAfter,
+    int X,
+    int Y,
+    int cx,
+    int cy,
+    uint uFlags);
+
+        const UInt32 SWP_NOSIZE = 0x0001;
+        const UInt32 SWP_NOMOVE = 0x0002;
+        const UInt32 SWP_NOACTIVATE = 0x0010;
+
+        static readonly IntPtr HWND_TOP = new IntPtr(0);
+
+        static void SendWpfWindowForward(Window window)
+        {
+            var hWnd = new WindowInteropHelper(window).Handle;
+            SetWindowPos(hWnd, HWND_TOP, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE);
         }
     }
 }

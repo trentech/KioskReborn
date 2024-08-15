@@ -11,12 +11,8 @@ using System.Runtime.CompilerServices;
 using System.IO;
 using System.Drawing;
 using Image = System.Windows.Controls.Image;
-using System.Threading;
-using System.Windows.Media.Media3D;
 using System.Windows.Input;
 using System.Reflection;
-using System.Windows.Media;
-using System.Drawing.Imaging;
 using KioskRebornLib;
 using System.ComponentModel;
 
@@ -35,6 +31,60 @@ namespace KioskReborn
 
         public TaskBarWindow()
         {
+            string images = Path.Combine(Settings.PATH, "Images");
+
+            if (!Directory.Exists(images))
+            {
+                Directory.CreateDirectory(images);
+
+                Bitmap image = Properties.Resources.calculator;
+                image.Save(Path.Combine(images, "calculator.png"));
+
+                image = Properties.Resources.notepad;
+                image.Save(Path.Combine(images, "notepad.png"));
+
+                image = Properties.Resources.background;
+                image.Save(Path.Combine(images, "background.jpg"));
+
+                image = Properties.Resources.lju_background;
+                image.Save(Path.Combine(images, "lju_background.jpg"));
+
+                image = Properties.Resources.WPS_Retriever.ToBitmap();
+                image.Save(Path.Combine(images, "WPS_Retriever.ico"));
+
+                image = Properties.Resources.LJU_PlotFetcher.ToBitmap();
+                image.Save(Path.Combine(images, "LJU_PlotFetcher.ico"));
+            }
+
+            Settings settings = Settings.Get();
+
+            Application.Current.Resources.MergedDictionaries.Clear();
+
+            switch (settings.Color)
+            {
+                case Settings.Colors.Gray:
+                    Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("Themes/Gray.xaml", UriKind.Relative) });
+                    break;
+                case Settings.Colors.Blue:
+                    Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("Themes/Blue.xaml", UriKind.Relative) });
+                    break;
+                case Settings.Colors.Classic:
+                    Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("Themes/Classic.xaml", UriKind.Relative) });
+                    break;
+                case Settings.Colors.Green:
+                    Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("Themes/Green.xaml", UriKind.Relative) });
+                    break;
+                case Settings.Colors.Dark:
+                    Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("Themes/Dark.xaml", UriKind.Relative) });
+                    break;
+                case Settings.Colors.LJU:
+                    Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("Themes/LJU.xaml", UriKind.Relative) });
+                    break;
+                default:
+                    break;
+            }
+
+
             InitializeComponent();
 
             this.DataContext = this;
@@ -47,8 +97,6 @@ namespace KioskReborn
             timer.Tick += new EventHandler(OnTick);
             timer.Interval = new TimeSpan(0, 0, 1);
             timer.Start();
-
-            Settings settings = Settings.Get();
 
             List<ButtonSettings> buttons = ButtonSettings.getButtons();
 
@@ -185,13 +233,17 @@ namespace KioskReborn
                 TaskbarGrid.Children.Add(button);
                 Grid.SetColumn(button, TaskbarGrid.ColumnDefinitions.Count - 1);
                 Taskbar.Width = Taskbar.Width + 50;
-
-                if (settings.Browser.AutoStart)
-                {
-                    BrowserWindow browser = new BrowserWindow(settings.Browser.URL);
-                    browser.Show();
-                }
             }
+
+            if (settings.Browser.AutoStart)
+            {
+                BrowserWindow browser = new BrowserWindow(settings.Browser.URL);
+                browser.Show();
+                browser.BringIntoView();
+            }
+
+            WallpaperWindow wallpaperWindow = new WallpaperWindow();
+            wallpaperWindow.Show();
         }
 
         private void OnTick(object sender, EventArgs e)

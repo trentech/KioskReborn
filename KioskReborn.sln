@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KioskReborn", "KioskReborn\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouchKeyboard", "TouchKeyboard\TouchKeyboard.csproj", "{7EFF4257-B6B9-47D7-8612-F4E0AA407B20}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KioskRebornUpdater", "KioskRebornUpdater\KioskRebornUpdater.csproj", "{DCE77BCB-5952-4AA0-B485-073650CBF808}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{65BCA7E1-9CC8-484C-BC33-EC05A4BA151C}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
@@ -17,8 +15,11 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KioskRebornLib", "KioskRebornLib\KioskRebornLib.csproj", "{F074EFA9-FA20-42EB-A41B-7C5C700D64D6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KioskRebornSetup", "KioskRebornSetup", "{ABF03C62-4B88-4FD8-A377-931782ACD8AB}"
+	ProjectSection(SolutionItems) = preProject
+		KioskRebornSetup\setup.iss = KioskRebornSetup\setup.iss
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KioskRebornTask", "KioskRebornTask\KioskRebornTask.csproj", "{E90608B8-1E23-4EC6-A414-F251016ECE27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KioskRebornUpdater", "KioskRebornUpdater\KioskRebornUpdater.csproj", "{376542FC-3D36-45C5-BA33-751F43B06EA4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,18 +35,14 @@ Global
 		{7EFF4257-B6B9-47D7-8612-F4E0AA407B20}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7EFF4257-B6B9-47D7-8612-F4E0AA407B20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7EFF4257-B6B9-47D7-8612-F4E0AA407B20}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DCE77BCB-5952-4AA0-B485-073650CBF808}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DCE77BCB-5952-4AA0-B485-073650CBF808}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DCE77BCB-5952-4AA0-B485-073650CBF808}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DCE77BCB-5952-4AA0-B485-073650CBF808}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F074EFA9-FA20-42EB-A41B-7C5C700D64D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F074EFA9-FA20-42EB-A41B-7C5C700D64D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F074EFA9-FA20-42EB-A41B-7C5C700D64D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F074EFA9-FA20-42EB-A41B-7C5C700D64D6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E90608B8-1E23-4EC6-A414-F251016ECE27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E90608B8-1E23-4EC6-A414-F251016ECE27}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E90608B8-1E23-4EC6-A414-F251016ECE27}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E90608B8-1E23-4EC6-A414-F251016ECE27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{376542FC-3D36-45C5-BA33-751F43B06EA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{376542FC-3D36-45C5-BA33-751F43B06EA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{376542FC-3D36-45C5-BA33-751F43B06EA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{376542FC-3D36-45C5-BA33-751F43B06EA4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

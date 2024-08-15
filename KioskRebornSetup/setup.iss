@@ -37,25 +37,19 @@ Source: "..\KioskReborn\bin\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: i
 Source: "..\KioskReborn\bin\Release\*"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\KioskReborn\bin\Release\Resources\*"; DestDir: "{app}\Resources"; Flags: ignoreversion
 Source: "..\KioskReborn\bin\Release\runtimes\*"; DestDir: "{app}\runtimes"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "..\KioskRebornTask\bin\Release\*"; DestDir: "{app}\Update"; Flags: ignoreversion recursesubdirs createallsubdirs; Check: CmdLineParamExists('/Service')
+Source: "..\KioskRebornUpdater\bin\Release\*"; DestDir: "{app}\Update"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
 [Run]
-Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall runasoriginaluser; Check: CmdLineParamExists('/Launch')
-Filename: "powershell.exe"; Parameters: "-ExecutionPolicy Bypass -Command $Trigger = @($(New-ScheduledTaskTrigger -Daily -At ""00:00:00""),$(New-ScheduledTaskTrigger -AtLogOn)); $Action = New-ScheduledTaskAction -Execute 'C:\Program Files\KioskReborn\Update\KioskRebornTask.exe'; Register-ScheduledTask -TaskName ""KioskRebornUpdate"" -Trigger $Trigger -Action $Action -User ""SYSTEM"" -RunLevel Highest;"; \
-WorkingDir: {app}; Flags: runhidden; Check: CmdLineParamExists('/Service')
-
-;Filename: "sc"; Parameters: "create KioskRebornUpdater start= auto DisplayName= KioskRebornUpdater binPath= ""C:\Program Files\KioskReborn\Update\KioskRebornUpdater.exe"""; Flags: runhidden postinstall; Check: CmdLineParamExists('/Service')
-;Filename: "sc"; Parameters: "config KioskRebornUpdater displayname= KioskRebornUpdater"; Flags: runhidden; Check: CmdLineParamExists('/Service')
-;Filename: "sc"; Parameters: "start KioskRebornUpdater"; Flags: runhidden; Check: CmdLineParamExists('/Service')
+Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall runasoriginaluser
+Filename: "powershell.exe"; Parameters: "-ExecutionPolicy Bypass -Command $Trigger = @($(New-ScheduledTaskTrigger -Daily -At ""00:00:00""),$(New-ScheduledTaskTrigger -AtLogOn)); $Action = New-ScheduledTaskAction -Execute 'C:\Program Files\KioskReborn\Update\KioskRebornUpdater.exe'; Register-ScheduledTask -TaskName ""KioskRebornUpdate"" -Trigger $Trigger -Action $Action -User ""SYSTEM"" -RunLevel Highest;"; \
+WorkingDir: {app}; Flags: runhidden
 
 [UninstallRun]
 Filename: "powershell.exe"; Parameters: "-ExecutionPolicy Bypass -Command Unregister-ScheduledTask -TaskName ""KioskRebornUpdate"" -Confirm:$false"; WorkingDir: {app}; Flags: runhidden;
-;Filename: "sc"; Parameters: "stop KioskRebornUpdater"; Flags: runhidden;
-;Filename: "sc"; Parameters: "delete KioskRebornUpdater"; Flags: runhidden;
 
 [Code]
 function CmdLineParamExists(const Value: string): Boolean;

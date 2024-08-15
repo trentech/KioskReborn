@@ -47,8 +47,6 @@ namespace KioskRebornTask
 
             if (update != string.Empty)
             {
-                bool relaunchApp = Process.GetProcessesByName("KioskReborn").Length != 0;
-
                 HttpClient httpClient = new HttpClient();
 
                 string path = Path.Combine(Path.GetTempPath(), "KioskReborn_Setup.exe");
@@ -84,10 +82,7 @@ namespace KioskRebornTask
 
                 File.Delete(path);
 
-                if (relaunchApp)
-                {
-                    RestartComputer();
-                }
+                RestartComputer();
             }
             else
             {
@@ -106,36 +101,6 @@ namespace KioskRebornTask
             Process.Start(process);
         }
 
-        static void LaunchApplication(string path)
-        {
-            Log.Information("Relaunching applications");
-
-            string domainName = (string)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "DefaultDomainName", string.Empty);
-            string userName = (string)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "DefaultUserName", string.Empty);
-            SecureString password = new NetworkCredential("", (string)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "DefaultPassword", string.Empty)).SecurePassword;
-
-            if (userName == string.Empty || password.Length == 0)
-            {
-                Log.Error("Cannot relaunch application. Autologin is not configured");
-            }
-            else
-            {
-                ProcessStartInfo process = new ProcessStartInfo();
-
-                process.UseShellExecute = false;
-                process.FileName = Path.Combine(path, "KioskReborn.exe");
-
-                if (domainName != string.Empty)
-                {
-                    process.Domain = domainName;
-                }
-
-                process.WorkingDirectory = path;
-                process.UserName = userName;
-                process.Password = password;
-                Process.Start(process);
-            }
-        }
         static async Task<string> CheckForUpdate(Version currentVersion)
         {
             HttpClient httpClient = new HttpClient();

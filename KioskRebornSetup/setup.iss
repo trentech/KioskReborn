@@ -12,7 +12,7 @@
 AppId={{EBFE5E66-17FB-47DB-951F-2EC240CCC411}}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
-ArchitecturesInstallIn64BitMode=x64
+ArchitecturesInstallIn64BitMode=x64os
 ;AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 DefaultDirName={autopf}\{#MyAppName}
@@ -49,7 +49,7 @@ Filename: "powershell.exe"; Parameters: "-ExecutionPolicy Bypass -Command $Trigg
 WorkingDir: {app}; Flags: runhidden
 
 [UninstallRun]
-Filename: "powershell.exe"; Parameters: "-ExecutionPolicy Bypass -Command Unregister-ScheduledTask -TaskName ""KioskRebornUpdate"" -Confirm:$false"; WorkingDir: {app}; Flags: runhidden;
+Filename: "powershell.exe"; Parameters: "-ExecutionPolicy Bypass -Command Unregister-ScheduledTask -TaskName ""KioskRebornUpdate"" -Confirm:$false"; WorkingDir: {app}; Flags: runhidden; RunOnceId: "DelTask";
 
 [Code]
 function CmdLineParamExists(const Value: string): Boolean;

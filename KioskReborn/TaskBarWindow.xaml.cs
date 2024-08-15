@@ -31,60 +31,6 @@ namespace KioskReborn
 
         public TaskBarWindow()
         {
-            string images = Path.Combine(Settings.PATH, "Images");
-
-            if (!Directory.Exists(images))
-            {
-                Directory.CreateDirectory(images);
-
-                Bitmap image = Properties.Resources.calculator;
-                image.Save(Path.Combine(images, "calculator.png"));
-
-                image = Properties.Resources.notepad;
-                image.Save(Path.Combine(images, "notepad.png"));
-
-                image = Properties.Resources.background;
-                image.Save(Path.Combine(images, "background.jpg"));
-
-                image = Properties.Resources.lju_background;
-                image.Save(Path.Combine(images, "lju_background.jpg"));
-
-                image = Properties.Resources.WPS_Retriever.ToBitmap();
-                image.Save(Path.Combine(images, "WPS_Retriever.ico"));
-
-                image = Properties.Resources.LJU_PlotFetcher.ToBitmap();
-                image.Save(Path.Combine(images, "LJU_PlotFetcher.ico"));
-            }
-
-            Settings settings = Settings.Get();
-
-            Application.Current.Resources.MergedDictionaries.Clear();
-
-            switch (settings.Color)
-            {
-                case Settings.Colors.Gray:
-                    Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("Themes/Gray.xaml", UriKind.Relative) });
-                    break;
-                case Settings.Colors.Blue:
-                    Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("Themes/Blue.xaml", UriKind.Relative) });
-                    break;
-                case Settings.Colors.Classic:
-                    Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("Themes/Classic.xaml", UriKind.Relative) });
-                    break;
-                case Settings.Colors.Green:
-                    Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("Themes/Green.xaml", UriKind.Relative) });
-                    break;
-                case Settings.Colors.Dark:
-                    Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("Themes/Dark.xaml", UriKind.Relative) });
-                    break;
-                case Settings.Colors.LJU:
-                    Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("Themes/LJU.xaml", UriKind.Relative) });
-                    break;
-                default:
-                    break;
-            }
-
-
             InitializeComponent();
 
             this.DataContext = this;
@@ -99,6 +45,8 @@ namespace KioskReborn
             timer.Start();
 
             List<ButtonSettings> buttons = ButtonSettings.getButtons();
+
+            Settings settings = Settings.Get();
 
             if (settings.Browser.Enable)
             {
@@ -234,6 +182,11 @@ namespace KioskReborn
                 Grid.SetColumn(button, TaskbarGrid.ColumnDefinitions.Count - 1);
                 Taskbar.Width = Taskbar.Width + 50;
             }
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            Settings settings = Settings.Get();
 
             if (settings.Browser.AutoStart)
             {
@@ -241,9 +194,6 @@ namespace KioskReborn
                 browser.Show();
                 browser.BringIntoView();
             }
-
-            WallpaperWindow wallpaperWindow = new WallpaperWindow();
-            wallpaperWindow.Show();
         }
 
         private void OnTick(object sender, EventArgs e)

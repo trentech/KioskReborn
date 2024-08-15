@@ -6,12 +6,12 @@ namespace KioskRebornLib
     public class Settings
     {
         [JsonIgnore]
+        #pragma warning disable CS8604 // Possible null reference argument.
         public static string PATH = Path.Combine(Environment.GetEnvironmentVariable("LocalAppData"), "KioskReborn");
+        #pragma warning restore CS8604 // Possible null reference argument.
+
         [JsonIgnore]
         private static string CONFIG = Path.Combine(PATH, "settings.json");
-
-      //  [JsonProperty]
-      //  public string UpdateLocation { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
         public enum Colors { Classic, Blue, Dark, Green, Gray, LJU }
@@ -25,15 +25,16 @@ namespace KioskRebornLib
         [JsonProperty]
         public List<Favorite> Favorites { get; set; }
 
-        public Settings()
+        private Settings()
         {
-     //       UpdateLocation = @"C:\Users\Public\Downloads";
             Color = Colors.Classic;
             Background = Path.Combine(PATH, "Images", "background.jpg");
             Browser = new WBrowser();
             Favorites = new List<Favorite>();
         }
 
+        #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
+        #pragma warning disable CS8603 // Possible null reference return.
         public static Settings Get()
         {
             Settings settings;
@@ -64,11 +65,17 @@ namespace KioskRebornLib
             }
             else
             {
+
                 settings = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(CONFIG));
+
             }
 
+
             return settings;
+
         }
+        #pragma warning restore CS8603 // Possible null reference return.
+        #pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
 
         public void Save()
         {

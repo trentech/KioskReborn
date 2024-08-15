@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KioskReborn"
         mc:Ignorable="d"
-        Title="KioskReborn" WindowStyle="None" ResizeMode="NoResize" Width="340" Height="50" Top="0" Left="0" Topmost="True" Style="{DynamicResource Window}">
+        Title="KioskReborn" WindowStyle="None" ResizeMode="NoResize" Width="340" Height="50" Top="0" Left="0" Topmost="True" Style="{DynamicResource Window}" Loaded="OnLoaded">
     <Grid x:Name="TaskbarGrid" ShowGridLines="False">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50"/>

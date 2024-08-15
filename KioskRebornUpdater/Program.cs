@@ -12,6 +12,10 @@ using System.Security;
 
 namespace KioskRebornTask
 {
+    #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
+    #pragma warning disable CS8602 // Dereference of a possibly null reference.
+    #pragma warning disable CS8604 // Possible null reference argument.
+    #pragma warning disable CS8603 // Possible null reference return.
     [System.Runtime.Versioning.SupportedOSPlatform("windows")]
     internal class Program
     {
@@ -39,6 +43,7 @@ namespace KioskRebornTask
             string appPath = new FileInfo(AppDomain.CurrentDomain.BaseDirectory).Directory.Parent.FullName;
 
             FileVersionInfo versionInfo = FileVersionInfo.GetVersionInfo(Path.Combine(appPath, "KioskReborn.exe"));
+
             Version currentVersion = Version.Parse(versionInfo.ProductVersion);
 
             Log.Information("Current Version: " + currentVersion);
@@ -108,10 +113,12 @@ namespace KioskRebornTask
 
             var contentsUrl = $"https://api.github.com/repos/trentech/KioskReborn/contents/KioskRebornSetup?ref=master";
             var contentsJson = await httpClient.GetStringAsync(contentsUrl);
+
             var contents = (JArray)JsonConvert.DeserializeObject(contentsJson);
 
             foreach (var file in contents)
             {
+
                 var name = (string)file["name"];
 
                 if (name.StartsWith("KioskReborn_Setup_"))

@@ -5,5 +5,4 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KioskReborn"
         mc:Ignorable="d"
-        Title="Wallpaper" Height="450" Width="800" Top="0" Left="0" ResizeMode="NoResize" WindowStyle="None" Focusable="False" ShowInTaskbar="False" Closing="OnClose">
-</Window>
+        Title="Wallpaper" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" WindowState="Maximized" Top="0" Left="0" ResizeMode="NoResize" WindowStyle="None" Focusable="False" ShowInTaskbar="False" Closing="OnClose" Loaded="OnLoaded"/>

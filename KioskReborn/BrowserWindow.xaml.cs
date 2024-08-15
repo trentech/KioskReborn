@@ -80,6 +80,8 @@ namespace KioskReborn
             }
 
             Activate();
+            Topmost = true;
+            Topmost = false;
             Focus();
         }
 

@@ -3,12 +3,9 @@ using Serilog.Sinks.SystemConsole.Themes;
 using Serilog;
 using KioskRebornLib;
 using System.Diagnostics;
-using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
-using System.Net;
-using System.Security;
 
 namespace KioskRebornTask
 {
@@ -85,6 +82,8 @@ namespace KioskRebornTask
 
                 process.WaitForExit();
 
+                Log.Information("Update complete");
+
                 File.Delete(path);
 
                 RestartComputer();
@@ -97,6 +96,8 @@ namespace KioskRebornTask
 
         static void RestartComputer()
         {
+            Log.Information("Restarting computer");
+
             ProcessStartInfo process = new ProcessStartInfo();
 
             process.FileName = "cmd";

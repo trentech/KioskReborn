@@ -6,6 +6,7 @@ using System.Diagnostics;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
+using Octokit;
 
 namespace KioskRebornTask
 {
@@ -55,7 +56,7 @@ namespace KioskRebornTask
 
                 using (var stream = httpClient.GetStreamAsync(update).Result)
                 {
-                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    using (var fileStream = new FileStream(path, System.IO.FileMode.Create))
                     {
                         Log.Information("Downloading update");
                         stream.CopyTo(fileStream);
@@ -119,7 +120,6 @@ namespace KioskRebornTask
 
             foreach (var file in contents)
             {
-
                 var name = (string)file["name"];
 
                 if (name.StartsWith("KioskReborn_Setup_"))
@@ -138,6 +138,69 @@ namespace KioskRebornTask
             }
 
             return string.Empty;
+        }
+
+
+        public async Task CheckForUpdates(GitHubClient gitHubClient)
+        {
+            try
+            {
+                var latestRelease = await gitHubClient.Repository.Release.GetLatest("trentech", "KioskReborn");
+                string latestVersion = latestRelease.TagName;
+
+                if (IsUpdateAvailable(latestVersion))
+                {
+                    bool IsDownloaded = DownloadAndUpdate(latestRelease.Assets[0].BrowserDownloadUrl);
+                }
+                else
+                {
+                    Console.WriteLine("You are already using the latest version.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error retrieving latest version from GitHub: " + ex.Message);
+            }
+        }
+
+        private bool IsUpdateAvailable(string latestVersion)
+        {
+            string appPath = new FileInfo(AppDomain.CurrentDomain.BaseDirectory).Directory.Parent.FullName;
+
+            FileVersionInfo versionInfo = FileVersionInfo.GetVersionInfo(Path.Combine(appPath, "KioskReborn.exe"));
+
+            Version current = Version.Parse(versionInfo.ProductVersion);
+
+            if (!string.IsNullOrEmpty(latestVersion))
+            {
+                Version latest = new Version(latestVersion);
+                return latest > current;
+            }
+            return false;
+        }
+
+        private bool DownloadAndUpdate(string downloadUrl)
+        {
+            try
+            {
+                HttpClient httpClient = new HttpClient();
+
+                string path = Path.Combine(Path.GetTempPath(), "KioskReborn_Setup.exe");
+
+                using (var stream = httpClient.GetStreamAsync(downloadUrl).Result)
+                {
+                    using (var fileStream = new FileStream(path, System.IO.FileMode.Create))
+                    {
+                        Log.Information("Downloading update");
+                        stream.CopyTo(fileStream);
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
     }
 }

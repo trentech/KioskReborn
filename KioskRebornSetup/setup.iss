@@ -44,7 +44,7 @@ Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
 [Run]
-Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall runasoriginaluser
+Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall runasoriginaluser; Check: CmdLineParamExists('/Run')
 Filename: "powershell.exe"; Parameters: "-ExecutionPolicy Bypass -Command $Trigger = @($(New-ScheduledTaskTrigger -Daily -At ""00:00:00""),$(New-ScheduledTaskTrigger -AtLogOn)); $Action = New-ScheduledTaskAction -Execute 'C:\Program Files\KioskReborn\Update\KioskRebornUpdater.exe'; Register-ScheduledTask -TaskName ""KioskRebornUpdate"" -Trigger $Trigger -Action $Action -User ""SYSTEM"" -RunLevel Highest;"; \
 WorkingDir: {app}; Flags: runhidden; Check: CmdLineParamExists('/Service')
 

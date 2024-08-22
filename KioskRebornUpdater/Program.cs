@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using Octokit;
+using System.IO;
 
 namespace KioskRebornTask
 {
@@ -36,34 +37,110 @@ namespace KioskRebornTask
                 .CreateLogger();
             }
 
+            Task<string> task = CheckForUpdates();
+            task.Wait();
+    
+            string update = task.Result;
+
+            if (update != string.Empty)
+            {
+                if (DownloadUpdate(update))
+                {
+                    if (InstallUpdate())
+                    {
+                        Log.Information("Update Complete");
+                        RestartComputer();
+                    }
+                }
+            }
+        }
+
+        private static async Task<string> CheckForUpdates()
+        {
             Log.Information("Checking for updates");
 
+            try
+            {
+                GitHubClient client = new GitHubClient(new Octokit.ProductHeaderValue("KioskReborn"));
+
+                var latestRelease = await client.Repository.Release.GetLatest("trentech", "KioskReborn");
+
+                string latestVersion = latestRelease.TagName;
+
+                if (IsUpdateAvailable(latestVersion))
+                {
+                    return latestRelease.Assets[0].BrowserDownloadUrl;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error retrieving latest version from GitHub: " + ex.Message);
+            }
+
+            return String.Empty;
+        }
+
+        private static bool IsUpdateAvailable(string latestVersion)
+        {
             string appPath = new FileInfo(AppDomain.CurrentDomain.BaseDirectory).Directory.Parent.FullName;
 
             FileVersionInfo versionInfo = FileVersionInfo.GetVersionInfo(Path.Combine(appPath, "KioskReborn.exe"));
 
-            Version currentVersion = Version.Parse(versionInfo.ProductVersion);
+            Version current = Version.Parse(versionInfo.ProductVersion);
 
-            Log.Information("Current Version: " + currentVersion);
+            if (!string.IsNullOrEmpty(latestVersion))
+            {
+                Version latest = new Version(latestVersion);
 
-            string update = CheckForUpdate(currentVersion).Result;
+                if (latest > current)
+                {
+                    Log.Information($"Current Version {current}");
+                    Log.Information($"Latest Version {latestVersion}");
+                    return true;
+                }
+                else
+                {
+                    Log.Information("KioskReborn is up to date");
+                }
+            }
 
-            if (update != string.Empty)
+            return false;
+        }
+
+        private static bool DownloadUpdate(string url)
+        {
+            Log.Information($"Download update: {url}");
+
+            try
             {
                 HttpClient httpClient = new HttpClient();
 
                 string path = Path.Combine(Path.GetTempPath(), "KioskReborn_Setup.exe");
 
-                using (var stream = httpClient.GetStreamAsync(update).Result)
+                using (var stream = httpClient.GetStreamAsync(url).Result)
                 {
                     using (var fileStream = new FileStream(path, System.IO.FileMode.Create))
                     {
-                        Log.Information("Downloading update");
                         stream.CopyTo(fileStream);
+                        return true;
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error downloading update: " + ex.Message);
+            }
 
-                Log.Information("Installing update");
+            return false;
+        }
+
+        private static bool InstallUpdate()
+        {
+            Log.Information("Installing update");
+
+            try
+            {
+                string path = Path.Combine(Path.GetTempPath(), "KioskReborn_Setup.exe");
 
                 Process[] explorer = Process.GetProcessesByName("KioskReborn");
 
@@ -83,16 +160,16 @@ namespace KioskRebornTask
 
                 process.WaitForExit();
 
-                Log.Information("Update complete");
-
                 File.Delete(path);
 
-                RestartComputer();
+                return true;
             }
-            else
+            catch (Exception ex)
             {
-                Log.Information("KioskReborn is up to date!");
+                Log.Error("Error installing update: " + ex.Message);
             }
+
+            return false;
         }
 
         static void RestartComputer()
@@ -106,101 +183,6 @@ namespace KioskRebornTask
             process.Arguments = "/C shutdown -f -r -t 0";
 
             Process.Start(process);
-        }
-
-        static async Task<string> CheckForUpdate(Version currentVersion)
-        {
-            HttpClient httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("MyApplication", "1"));
-
-            var contentsUrl = $"https://api.github.com/repos/trentech/KioskReborn/contents/KioskRebornSetup?ref=master";
-            var contentsJson = await httpClient.GetStringAsync(contentsUrl);
-
-            var contents = (JArray)JsonConvert.DeserializeObject(contentsJson);
-
-            foreach (var file in contents)
-            {
-                var name = (string)file["name"];
-
-                if (name.StartsWith("KioskReborn_Setup_"))
-                {
-                    Version latestVersion = Version.Parse(name.Replace("KioskReborn_Setup_", "").Replace(".exe", ""));
-
-                    if (currentVersion < latestVersion)
-                    {
-                        Log.Information("New Version Available: " + latestVersion);
-
-                        return (string)file["download_url"];
-                    }
-
-                    return string.Empty;
-                }
-            }
-
-            return string.Empty;
-        }
-
-
-        public async Task CheckForUpdates(GitHubClient gitHubClient)
-        {
-            try
-            {
-                var latestRelease = await gitHubClient.Repository.Release.GetLatest("trentech", "KioskReborn");
-                string latestVersion = latestRelease.TagName;
-
-                if (IsUpdateAvailable(latestVersion))
-                {
-                    bool IsDownloaded = DownloadAndUpdate(latestRelease.Assets[0].BrowserDownloadUrl);
-                }
-                else
-                {
-                    Console.WriteLine("You are already using the latest version.");
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error retrieving latest version from GitHub: " + ex.Message);
-            }
-        }
-
-        private bool IsUpdateAvailable(string latestVersion)
-        {
-            string appPath = new FileInfo(AppDomain.CurrentDomain.BaseDirectory).Directory.Parent.FullName;
-
-            FileVersionInfo versionInfo = FileVersionInfo.GetVersionInfo(Path.Combine(appPath, "KioskReborn.exe"));
-
-            Version current = Version.Parse(versionInfo.ProductVersion);
-
-            if (!string.IsNullOrEmpty(latestVersion))
-            {
-                Version latest = new Version(latestVersion);
-                return latest > current;
-            }
-            return false;
-        }
-
-        private bool DownloadAndUpdate(string downloadUrl)
-        {
-            try
-            {
-                HttpClient httpClient = new HttpClient();
-
-                string path = Path.Combine(Path.GetTempPath(), "KioskReborn_Setup.exe");
-
-                using (var stream = httpClient.GetStreamAsync(downloadUrl).Result)
-                {
-                    using (var fileStream = new FileStream(path, System.IO.FileMode.Create))
-                    {
-                        Log.Information("Downloading update");
-                        stream.CopyTo(fileStream);
-                        return true;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
         }
     }
 }

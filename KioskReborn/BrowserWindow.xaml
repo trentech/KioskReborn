@@ -14,11 +14,13 @@
                 <ColumnDefinition Width="50"/>
                 <ColumnDefinition Width="50"/>
                 <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Button Style="{DynamicResource BrowserButton}" Grid.Column="0" x:Name="ExitButton" DockPanel.Dock="Right" Content="X" BorderThickness="0,0,0,0" FontFamily="Calibri" FontSize="26" FontWeight="Bold" Click="OnExit"/>
             <Button Content="{DynamicResource Right}" Style="{DynamicResource BrowserButton}" Grid.Column="1" x:Name="ForwardButton" DockPanel.Dock="Right" BorderThickness="0,0,0,0" Click="OnForward"/>
             <Button Content="{DynamicResource Lft}" Style="{DynamicResource BrowserButton}" Grid.Column="2" x:Name="BackwardButton" DockPanel.Dock="Right" BorderThickness="0,0,0,0" Click="OnBack"/>
             <Button Content="{DynamicResource Refresh}" Style="{DynamicResource BrowserButton}" Grid.Column="3" x:Name="RefreshButton" DockPanel.Dock="Right" BorderThickness="0,0,0,0" Click="OnRefresh"/>
+            <Menu Name="BookmarksMenu" Grid.Column="4" Width="105" Margin="2,2,2,2" Padding="0" IsMainMenu="True"/>
         </Grid>
         <Wpf:WebView2 x:Name="webView" Source="https://google.com"/>
     </DockPanel>

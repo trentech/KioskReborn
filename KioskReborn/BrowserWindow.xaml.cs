@@ -41,47 +41,56 @@ namespace KioskReborn
 
             Settings settings = Settings.Get();
 
+            TextBlock textBlock = new TextBlock();
+
+            textBlock.TextWrapping = TextWrapping.Wrap;
+            textBlock.TextAlignment = TextAlignment.Center;
+            textBlock.FontSize = 20;
+            textBlock.FontFamily = new FontFamily("Calibri");
+            textBlock.FontWeight = FontWeights.Bold;
+            textBlock.Text = "Bookmarks";
+
+            MenuItem bookmarksMenu = new MenuItem();
+            bookmarksMenu.Header = textBlock;
+            bookmarksMenu.Height = 46;
+            bookmarksMenu.BorderThickness = new Thickness(0);
+
+            Style style = Application.Current.FindResource("BrowserMenuItem") as Style;
+            bookmarksMenu.Style = style;
+
             List<Settings.Favorite> favorites = settings.Favorites;
 
             foreach (Settings.Favorite favorite in favorites)
             {
-                TextBlock textBlock = new TextBlock();
+                textBlock = new TextBlock();
 
-                textBlock.FontSize = 14;
+                textBlock.FontSize = 20;
                 textBlock.TextWrapping = TextWrapping.Wrap;
                 textBlock.TextAlignment = TextAlignment.Center;
-                textBlock.FontSize = 14;
                 textBlock.FontFamily = new FontFamily("Calibri");
                 textBlock.FontWeight = FontWeights.Bold;
                 textBlock.Text = favorite.Name;
 
-                Style style = Application.Current.FindResource("BrowserTextFavorite") as Style;
-                textBlock.Style = style;
+                MenuItem menuItem = new MenuItem();
+                menuItem.Header = textBlock;
+                menuItem.Height = 50;
+                menuItem.BorderThickness = new Thickness(0);
 
-                Button button = new Button();
-
-                button.HorizontalAlignment = HorizontalAlignment.Stretch;
-                button.VerticalAlignment = VerticalAlignment.Stretch;
-                button.BorderThickness = new Thickness(2, 2, 2, 2);
-
-                button.Click += (sender, args) =>
+                menuItem.Click += (sender, args) => 
                 {
                     webView.Source = new Uri(favorite.URL);
                 };
 
-                style = Application.Current.FindResource("BrowserButtonFavorite") as Style;
-                button.Style = style;
+                style = Application.Current.FindResource("BrowserMenuItem") as Style;
+                menuItem.Style = style;
 
-                button.Content = textBlock;
-
-                ToolBar.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(favorite.Width) });
-                ToolBar.Children.Add(button);
-                Grid.SetColumn(button, ToolBar.ColumnDefinitions.Count - 1);
+                bookmarksMenu.Items.Add(menuItem);
+                bookmarksMenu.Items.Add(new Separator());
             }
 
+            BookmarksMenu.Items.Add(bookmarksMenu);
+
             Activate();
-            Topmost = true;
-            Topmost = false;
             Focus();
         }
 

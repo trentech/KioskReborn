@@ -15,7 +15,9 @@ namespace KioskReborn
     {
         public WallpaperWindow()
         {
-            Shell.Hide();
+            #if !DEBUG
+                Shell.Hide();
+            #endif
 
             string images = Path.Combine(Settings.PATH, "Images");
 
@@ -102,7 +104,9 @@ namespace KioskReborn
 
         private void OnClose(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            Shell.Show();
+            #if !DEBUG
+                Shell.Show();
+            #endif
         }
 
         [DllImport("user32.dll")]

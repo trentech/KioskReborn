@@ -383,7 +383,7 @@
 
     <Style TargetType="Button" x:Key="BrowserButton">
         <Setter Property="Background" Value="#c9c9c9"/>
-        <Setter Property="BorderBrush" Value="#85bb2d"/>														
+        <Setter Property="BorderBrush" Value="#85bb2d"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -458,6 +458,10 @@
                 <Setter Property="Margin" Value="2"></Setter>
             </Trigger>
         </Style.Triggers>
+    </Style>
+
+    <Style TargetType="MenuItem" x:Key="BrowserMenuItem">
+        <Setter Property="Background" Value="#c9c9c9"/>
     </Style>
     
     <Style TargetType="Window" x:Key="Window">
